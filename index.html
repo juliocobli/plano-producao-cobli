@@ -278,6 +278,63 @@ table.slim { min-width: 640px; }
 .reg dt { color: var(--muted); font-weight: 700; font-size: .74rem; padding-top: 2px; }
 .reg dd { margin: 0; white-space: pre-line; }
 @media (max-width: 560px) { .reg dl { grid-template-columns: 1fr; } .pes-head { grid-template-columns: 1fr; } }
+.adm-resumo { margin: 4px 0 0; }
+.adm-corpo { display: flex; flex-direction: column; gap: 26px; }
+.blk { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.blk-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.blk-head h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.blk > .sub { margin: 0 0 4px; }
+.card-tab { border: 1px solid var(--line); border-radius: 12px; padding: 4px 12px; background: var(--panel); }
+table.tb-diario { min-width: 640px; font-size: .82rem; }
+table.tb-diario th { position: static; font-size: .7rem; text-transform: none; letter-spacing: 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+table.tb-diario td { padding: 9px 10px; }
+table.tb-diario td.b { font-weight: 700; }
+table.tb-diario td.m { color: var(--muted); }
+table.tb-diario td.n { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: 12px; }
+.pes-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--panel); cursor: pointer; display: flex; flex-direction: column; gap: 8px; }
+.pes-card:hover, .pes-card:focus-visible { border-color: var(--blue); outline: none; }
+.pes-card h4 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.3rem; }
+.pes-sub { margin: -4px 0 0; font-size: .76rem; color: var(--muted); }
+.pes-dl { margin: 0; display: grid; grid-template-columns: 6.6rem 1fr; gap: 4px 8px; font-size: .8rem; }
+.pes-dl dt { color: var(--muted); }
+.pes-dl dd { margin: 0; }
+.pes-metas { display: flex; flex-direction: column; gap: 5px; padding-top: 8px; border-top: 1px solid var(--line); }
+.pm { display: grid; grid-template-columns: 2.6rem 1fr 2.6rem; align-items: center; gap: 8px; font-size: .76rem; }
+.pm .track { height: 8px; }
+.pm b { text-align: right; font-variant-numeric: tabular-nums; color: var(--blue); }
+.pm-l { color: var(--muted); font-weight: 700; }
+.pes-foot { display: flex; justify-content: space-between; gap: 6px; flex-wrap: wrap; font-size: .74rem; font-weight: 700; padding-top: 8px; border-top: 1px solid var(--line); }
+.duo table.tb-diario { min-width: 0; }
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: 20px; align-items: start; }
+.fb-list { display: flex; flex-direction: column; gap: 8px; }
+.fb, .anot { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--panel); cursor: pointer; }
+.fb:hover, .anot:hover { border-color: var(--blue); }
+.fb p, .anot > p { margin: 6px 0 0; font-size: .84rem; }
+.fb-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: .84rem; }
+.fb-top .m { color: var(--muted); }
+.mapa-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--panel); margin-bottom: 10px; }
+.mapa-h { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.mapa-h h4 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
+.mapa-niv { font-size: .8rem; }
+.mapa-area { font-size: .8rem; color: var(--muted); }
+.mapa-eleg { margin: -4px 0 10px; font-size: .8rem; color: var(--muted); }
+.mapa-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 14px; }
+.mapa-cols.dois { margin-top: 10px; }
+.mapa-col { cursor: pointer; border-radius: 8px; }
+.mapa-col .lab, .anot .lab { display: block; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--fg); margin-bottom: 3px; }
+.mapa-col p { margin: 0; font-size: .82rem; line-height: 1.45; }
+.mapa-col.destaque { background: var(--ok-soft); padding: 10px 12px; }
+.mapa-col:hover .lab { color: var(--blue); }
+.onde-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr)); gap: 14px; }
+details.visao { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: .82rem; }
+details.visao summary { cursor: pointer; color: var(--muted); }
+.rot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 12px; }
+.rot { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--panel); }
+.rot h4 { margin: 0 0 6px; font-family: var(--display); font-weight: 600; }
+.rot ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 6px; font-size: .82rem; }
+.rot li { cursor: pointer; }
+.rot li:hover { color: var(--blue); }
 .poli-leg { display: flex; gap: 14px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); margin: 6px 0 12px; }
 .poli-leg span { display: inline-flex; align-items: center; gap: 6px; }
 table.poli { min-width: 860px; font-size: .8rem; }
@@ -423,28 +480,20 @@ table.slim tr:hover td { background: transparent; }
       <div><h2>Painel admin</h2></div>
       <button type="button" class="btn ghost" id="voltar">← Voltar ao plano</button>
     </div>
+    <p class="sub adm-resumo" id="adm-resumo"></p>
     <nav class="subnav" id="adm-nav" aria-label="Seções do painel admin">
-      <button type="button" data-sub="agenda">Agenda de 1:1</button>
-      <button type="button" data-sub="pessoas">Pessoas</button>
+      <button type="button" data-sub="equipe">Equipe Coblers</button>
+      <button type="button" data-sub="mapa">Mapa</button>
+      <button type="button" data-sub="planejamento">Planejamento</button>
+      <button type="button" data-sub="anotacoes">Minhas anotações</button>
       <button type="button" data-sub="restritos">Assuntos restritos</button>
-      <button type="button" data-sub="geral">Geral</button>
       <button type="button" data-sub="acessos">Acessos e histórico</button>
     </nav>
-    <div class="adm-sub" data-sub="agenda">
-      <div class="tools">
-        <button type="button" class="btn" id="adm-novo-oo">+ Novo 1:1</button>
-        <label class="chk"><input type="checkbox" id="adm-ver-passados"> Mostrar 1:1 que já passaram</label>
-      </div>
-      <div id="adm-agenda-lista"></div>
-      <p class="empty" id="adm-agenda-vazio" hidden>Nenhum 1:1 marcado.</p>
-    </div>
-    <div class="adm-sub" data-sub="pessoas" hidden>
-      <div class="chips" id="adm-pessoa-chips" style="margin-bottom:12px"></div>
-      <div id="adm-pessoa-corpo" class="pes-corpo"></div>
-    </div>
-    <div class="adm-sub" data-sub="geral" hidden>
-      <div id="adm-geral-corpo" class="pes-corpo"></div>
-    </div>
+    <div class="chips" id="adm-pessoa-chips" style="margin-bottom:16px"></div>
+    <div class="adm-sub" data-sub="equipe"><div id="adm-equipe" class="adm-corpo"></div></div>
+    <div class="adm-sub" data-sub="mapa" hidden><div id="adm-mapa" class="adm-corpo"></div></div>
+    <div class="adm-sub" data-sub="planejamento" hidden><div id="adm-plan" class="adm-corpo"></div></div>
+    <div class="adm-sub" data-sub="anotacoes" hidden><div id="adm-anot" class="adm-corpo"></div></div>
     <div class="adm-sub" data-sub="restritos" hidden>
       <div class="tools"><button type="button" class="btn" id="priv-add">+ Novo assunto</button></div>
       <div class="tablewrap">
@@ -1261,7 +1310,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     mapa: { titulo: 'Mapa: onde está e como chegar lá', unico: true, campos: [['se_ve', 'Como se vê (autoavaliação H1)', 'area'], ['lider', 'Visão do líder anterior', 'area'], ['falta', 'O que falta', 'area'], ['conquistar', 'Como conquistar', 'area']] },
     pdi: { titulo: 'PDI H2 2026', campos: [['objetivo', 'Objetivo'], ['acao', 'Ação', 'area'], ['meta', 'Meta'], ['revisao', 'Revisão'], ['status', 'Status', ['Não iniciado', 'Em andamento', 'Concluído']]] },
     promocao: { titulo: 'Promoção', unico: true, campos: [['leitura', 'Leitura'], ['elegivel', 'Elegível'], ['comportamentos', 'Comportamentos do nível', 'area'], ['atribuicoes', 'Atribuições técnicas', 'area'], ['espaco', 'Espaço no time', 'area'], ['defesa', 'Defesa (resultados)', 'area'], ['consistencia', 'Consistência', 'area'], ['ja_mostra', 'Já mostra', 'area'], ['falta', 'O que falta', 'area']] },
-    anotacao: { titulo: 'Anotações', campos: [['data', 'Data', 'date'], ['tipo', 'Tipo', ['Minha visão', 'Direção', '1:1', 'Feedback', 'Outro']], ['texto', 'Texto', 'area'], ['positivos', 'Pontos fortes', 'area'], ['atencao', 'Atenção', 'area'], ['acoes', 'Ações', 'area'], ['original', 'Texto original', 'area']] },
+    anotacao: { titulo: 'Anotações', campos: [['data', 'Data', 'date'], ['tipo', 'Tipo', ['Minha visão', 'Direção', '1:1', 'Feedback', 'Outro']], ['texto', 'Texto', 'area'], ['positivos', 'Pontos fortes', 'area'], ['atencao', 'Atenção', 'area'], ['acoes', 'Ações', 'area'], ['original', 'Seu texto original (antes da correção)', 'area']] },
     feedback: { titulo: 'Feedbacks prontos (SCI)', campos: [['tipo', 'Tipo', ['Positivo', 'Corretivo']], ['texto', 'Texto', 'area']] },
     roteiro: { titulo: 'Roteiro do 1º 1:1', campos: [['passo', 'Passo', 'area']] },
     plano90: { titulo: 'Plano de 90 dias', campos: [['fase', 'Fase'], ['periodo', 'Período'], ['acao', 'Ação', 'area'], ['status', 'Status', ['A fazer', 'Em andamento', 'Feito']]] },
@@ -1270,7 +1319,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     guia: { titulo: 'Guia de 1:1 e feedback', campos: [['tema', 'Tema'], ['titulo', 'Título'], ['texto', 'Texto', 'area']] },
     integracao: { titulo: 'Integração dos terceirizados', campos: [['etapa', 'Etapa'], ['acao', 'Ação', 'area'], ['quando', 'Quando']] }
   };
-  let registros = [], ooList = [], ooPriv = new Map(), admSub = 'agenda', admPessoa = null, verPassados = false;
+  let registros = [], ooList = [], ooPriv = new Map(), admSub = 'equipe', admPessoa = 'todos', verPassados = false;
 
   async function carregarCentro() {
     const reqs = [sb.from('one_on_ones').select('*').order('data')];
@@ -1301,53 +1350,6 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     });
   }
 
-  // ----- Painel admin -----
-  function setSub(s) { admSub = s; renderAdmin(); }
-  document.querySelectorAll('#adm-nav button').forEach(b => b.addEventListener('click', () => setSub(b.dataset.sub)));
-  function renderAdmin() {
-    document.querySelectorAll('#adm-nav button').forEach(b => b.setAttribute('aria-current', b.dataset.sub === admSub ? 'page' : 'false'));
-    document.querySelectorAll('.adm-sub').forEach(d => { d.hidden = d.dataset.sub !== admSub; });
-    if (admSub === 'agenda') renderAgenda();
-    if (admSub === 'pessoas') renderPessoaAdm();
-    if (admSub === 'geral') renderGeral();
-  }
-
-  function ooLinha(o, comPessoa) {
-    const li = el('li', 'oo-item' + (o.data < hojeISO() ? ' passado' : ''));
-    const top = el('div', 'oo-top');
-    top.append(el('b', 'oo-data', fmtDia(o.data)), el('span', 'oo-hora', o.horario));
-    if (comPessoa) top.appendChild(el('b', 'oo-pessoa', nomeDe(o.pessoa_id)));
-    top.appendChild(el('span', 'oo-tit', o.titulo));
-    top.appendChild(el('span', 'pill ' + (ooCls[o.status] || 's-iniciar'), o.status));
-    const pv = ooPriv.get(o.id);
-    const marcas = el('span', 'oo-marcas');
-    if (pv && pv.pauta) marcas.appendChild(el('span', 'mk', 'Pauta'));
-    if (pv && pv.anotacoes) marcas.appendChild(el('span', 'mk', 'Anotações'));
-    if (o.combinados) marcas.appendChild(el('span', 'mk ok', 'Combinados'));
-    top.appendChild(marcas);
-    li.appendChild(top);
-    if (o.observacao) li.appendChild(el('p', 'oo-obs', o.observacao));
-    li.tabIndex = 0; li.classList.add('clic');
-    li.addEventListener('click', () => abrirOO(o));
-    li.addEventListener('keydown', (e) => { if (e.key === 'Enter') abrirOO(o); });
-    return li;
-  }
-  function renderAgenda() {
-    const box = $('adm-agenda-lista'); box.textContent = '';
-    const hoje = hojeISO();
-    const lista = ooList.filter(o => verPassados || o.data >= hoje).sort((a, b) => a.data.localeCompare(b.data) || nomeDe(a.pessoa_id).localeCompare(nomeDe(b.pessoa_id)));
-    $('adm-agenda-vazio').hidden = lista.length > 0;
-    let semana = null, ul = null;
-    lista.forEach(o => {
-      const [y, m, d] = o.data.split('-').map(Number); const dt = new Date(y, m - 1, d); dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
-      const seg = String(dt.getDate()).padStart(2, '0') + '/' + String(dt.getMonth() + 1).padStart(2, '0');
-      if (seg !== semana) { semana = seg; box.appendChild(el('h4', 'semana', 'Semana de ' + seg)); ul = el('ul', 'oo-lista'); box.appendChild(ul); }
-      ul.appendChild(ooLinha(o, true));
-    });
-  }
-  $('adm-ver-passados').addEventListener('change', (e) => { verPassados = e.target.checked; renderAgenda(); });
-  $('adm-novo-oo').addEventListener('click', () => abrirOO(null, null));
-
   function pct(n, d) { return d ? Math.round(n / d * 100) : 0; }
   function barra(rotulo, valor, detalhe) {
     const w = el('div', 'meta-bar');
@@ -1365,77 +1367,230 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     return { trilha: pct(pontos, itens.length), itens: itens.length, avaliados, pdi: pct(feitos, pdi.length), pdiTotal: pdi.length, feitos, andamento };
   }
 
-  function renderPessoaAdm() {
-    const comTrilha = pessoasAll.filter(p => p.tem_trilha);
-    if (!admPessoa || !comTrilha.some(p => p.id === admPessoa)) admPessoa = (comTrilha[0] || {}).id || null;
+  // ----- Painel admin (formato do Diário de bordo) -----
+  function setSub(s) { admSub = s; renderAdmin(); }
+  document.querySelectorAll('#adm-nav button').forEach(b => b.addEventListener('click', () => setSub(b.dataset.sub)));
+  const ORDEM_TIME = ['ryan', 'adriano', 'jota', 'tome', 'tenorio'];
+  const time = () => pessoasAll.filter(p => p.tem_trilha).sort((a, b) => (ORDEM_TIME.indexOf(a.id) + 1 || 99) - (ORDEM_TIME.indexOf(b.id) + 1 || 99));
+  const filtroPessoa = (pid) => admPessoa === 'todos' || !admPessoa || pid === admPessoa;
+  function renderAdmin() {
+    if (!admPessoa) admPessoa = 'todos';
     const chips = $('adm-pessoa-chips'); chips.textContent = '';
-    comTrilha.forEach(p => {
+    [{ id: 'todos', apelido: 'Todos' }, ...time()].forEach(p => {
       const c = el('button', 'chip', p.apelido); c.type = 'button'; c.setAttribute('aria-pressed', String(p.id === admPessoa));
-      c.addEventListener('click', () => { admPessoa = p.id; renderPessoaAdm(); }); chips.appendChild(c);
+      c.addEventListener('click', () => { admPessoa = p.id; renderAdmin(); }); chips.appendChild(c);
     });
-    const p = pessoasAll.find(x => x.id === admPessoa); const box = $('adm-pessoa-corpo'); box.textContent = '';
-    if (!p) return;
-    const head = el('div', 'card pes-head');
-    const w = el('div'); w.append(el('span', 'tr-eyebrow', p.area || ''), el('h2', null, p.nome), el('p', 'tr-cargo', (p.cargo_atual || '') + ' → próximo cargo: ' + (p.cargo_alvo || '')));
-    const bt = el('button', 'btn ghost', 'Abrir trilha'); bt.type = 'button'; bt.addEventListener('click', () => { trilhaSel = p.id; setView('trilha'); });
-    head.append(w, bt);
-    const m = metas(p.id);
-    const bars = el('div', 'meta-grid');
-    bars.append(barra('Trilha do próximo cargo', m.trilha, `${m.avaliados} de ${m.itens} tópicos avaliados por você (Atende = 100%, Parcial = 50%)`),
-      barra('PDI H2', m.pdi, `${m.feitos} de ${m.pdiTotal} objetivos concluídos · ${m.andamento} em andamento`));
-    head.appendChild(bars);
-    box.appendChild(head);
-
-    // agenda da pessoa
-    const ag = el('section', 'card sec-col');
-    const agh = el('div', 'sec-head'); agh.appendChild(el('h3', null, 'Agenda de 1:1'));
-    const nb = el('button', 'btn ghost', '+ Novo 1:1'); nb.type = 'button'; nb.addEventListener('click', () => abrirOO(null, p.id)); agh.appendChild(nb);
-    ag.appendChild(agh);
-    const ul = el('ul', 'oo-lista'); ooList.filter(o => o.pessoa_id === p.id).forEach(o => ul.appendChild(ooLinha(o, false)));
-    if (!ul.children.length) ag.appendChild(el('p', 'empty', 'Nenhum 1:1 marcado.')); else ag.appendChild(ul);
-    box.appendChild(ag);
-    ['pdi', 'mapa', 'promocao', 'anotacao', 'feedback', 'roteiro', 'ficha'].forEach(c => box.appendChild(secaoColecao(c, p.id)));
+    $('adm-pessoa-chips').hidden = !['equipe', 'mapa', 'anotacoes', 'planejamento'].includes(admSub);
+    document.querySelectorAll('#adm-nav button').forEach(b => b.setAttribute('aria-current', b.dataset.sub === admSub ? 'page' : 'false'));
+    document.querySelectorAll('.adm-sub').forEach(d => { d.hidden = d.dataset.sub !== admSub; });
+    const hoje = hojeISO();
+    const prox = ooList.filter(o => o.data >= hoje && o.status !== 'Cancelado');
+    const pdiAll = registros.filter(r => r.colecao === 'pdi');
+    $('adm-resumo').textContent = `${time().length} diretos · ${pdiAll.length} objetivos de PDI, ${pdiAll.filter(r => r.dados.status === 'Concluído').length} concluídos · próximo 1:1 em ${prox.length ? fmtDia(prox[0].data) + ' com ' + nomeDe(prox[0].pessoa_id) : '—'} · ${registros.filter(r => r.colecao === 'anotacao').length} anotações suas`;
+    if (admSub === 'equipe') renderEquipe();
+    if (admSub === 'mapa') renderMapa();
+    if (admSub === 'planejamento') renderPlanejamento();
+    if (admSub === 'anotacoes') renderAnotacoes();
   }
 
-  function renderGeral() {
-    const box = $('adm-geral-corpo'); box.textContent = '';
-    ['plano90', 'pergunta', 'criterio', 'guia', 'integracao'].forEach(c => box.appendChild(secaoColecao(c, null)));
-    box.appendChild(secaoColecao('anotacao', null, 'Anotações gerais (equipe)'));
-  }
-
-  function secaoColecao(col, pid, tituloAlt) {
-    const cfg = COL[col];
-    const rows = registros.filter(r => r.colecao === col && (r.pessoa_id || null) === pid).sort((a, b) => a.ordem - b.ordem);
-    const s = el('section', 'card sec-col');
-    const h = el('div', 'sec-head'); h.appendChild(el('h3', null, tituloAlt || cfg.titulo));
-    if (!cfg.unico || !rows.length) { const b = el('button', 'btn ghost', cfg.unico ? '+ Preencher' : '+ Adicionar'); b.type = 'button'; b.addEventListener('click', () => abrirReg(col, pid, null)); h.appendChild(b); }
-    s.appendChild(h);
-    if (!rows.length) { s.appendChild(el('p', 'empty', 'Nada registrado ainda.')); return s; }
-    const ul = el('ul', 'reg-lista');
-    rows.forEach(r => {
-      const li = el('li', 'reg clic'); li.tabIndex = 0;
-      const dl = el('dl');
-      cfg.campos.forEach(([k, lab, tipo]) => {
-        const v = r.dados[k]; if (v == null || v === '') return;
-        dl.append(el('dt', null, lab));
-        const dd = el('dd'); if (Array.isArray(tipo)) { const sp = el('span', 'pill s-iniciar', v); dd.appendChild(sp); } else dd.textContent = tipo === 'date' ? fmtDia(v) : v;
-        dl.appendChild(dd);
-      });
-      li.appendChild(dl);
-      li.addEventListener('click', () => abrirReg(col, pid, r));
-      li.addEventListener('keydown', (e) => { if (e.key === 'Enter') abrirReg(col, pid, r); });
-      ul.appendChild(li);
-    });
-    s.appendChild(ul);
+  // blocos de montagem
+  function bloco(titulo, sub, acao) {
+    const s = el('section', 'blk');
+    const h = el('div', 'blk-head'); h.appendChild(el('h3', null, titulo));
+    if (acao) { const b = el('button', 'linkbtn', acao[0]); b.type = 'button'; b.addEventListener('click', acao[1]); h.appendChild(b); }
+    s.appendChild(h); if (sub) s.appendChild(el('p', 'sub', sub));
     return s;
+  }
+  function tabela(cols, rows, onClick, vazio) {
+    if (!rows.length) return el('p', 'empty', vazio || 'Nada registrado ainda.');
+    const w = el('div', 'tablewrap card-tab'); const t = el('table', 'tb-diario'); const th = el('tr');
+    cols.forEach(c => th.appendChild(el('th', c.cls || null, c.l)));
+    const thead = el('thead'); thead.appendChild(th); t.appendChild(thead);
+    const tb = el('tbody');
+    rows.forEach(r => {
+      const tr = el('tr'); tr.tabIndex = 0;
+      cols.forEach(c => {
+        const v = c.f(r); const td = el('td', c.cls || null);
+        if (v instanceof Node) td.appendChild(v); else td.textContent = v == null ? '' : v;
+        tr.appendChild(td);
+      });
+      tr.addEventListener('click', () => onClick(r)); tr.addEventListener('keydown', (e) => { if (e.key === 'Enter') onClick(r); });
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); w.appendChild(t); return w;
+  }
+  const pill = (txt, cls) => el('span', 'pill ' + (cls || 's-iniciar'), txt || '—');
+  const statusCls = (s) => ({ 'Concluído': 's-concluido', 'Feito': 's-concluido', 'Respondida': 's-concluido', 'Realizado': 's-concluido', 'Em andamento': 's-andamento', 'A confirmar': 's-andamento', 'Remarcado': 's-andamento', 'Cancelado': 'p-alta', 'Aberta': 'p-alta' })[s] || 's-iniciar';
+  const reg = (col, pid) => registros.filter(r => r.colecao === col && (pid === undefined || (r.pessoa_id || null) === pid)).sort((a, b) => a.ordem - b.ordem);
+  const regP = (col) => registros.filter(r => r.colecao === col && filtroPessoa(r.pessoa_id)).sort((a, b) => nomeDe(a.pessoa_id).localeCompare(nomeDe(b.pessoa_id)) || a.ordem - b.ordem);
+  const novoPara = (col) => () => abrirReg(col, admPessoa !== 'todos' ? admPessoa : null, null, true);
+
+  // ---- Equipe Coblers ----
+  function renderEquipe() {
+    const box = $('adm-equipe'); box.textContent = '';
+    const hoje = hojeISO();
+    // Pessoas
+    const b1 = bloco('Pessoas', 'Base: PitStops H1 2026. Clique no cartão para editar. As porcentagens são só suas: trilha pela sua avaliação (Atende = 100%, Parcial = 50%) e PDI concluído.');
+    const grid = el('div', 'pes-grid');
+    time().filter(p => filtroPessoa(p.id)).forEach(p => {
+      const f = (reg('ficha', p.id)[0] || { dados: {} }); const d = f.dados;
+      const c = el('article', 'pes-card'); c.tabIndex = 0;
+      c.append(el('h4', null, p.apelido), el('p', 'pes-sub', p.nome + ' · ' + (p.cargo_atual || '')));
+      const dl = el('dl', 'pes-dl');
+      [['Na Cobli desde', d.admissao ? d.admissao.split('-').reverse().join('/') : ''], ['Avaliação H1', d.classificacao ? pill(d.classificacao, d.classificacao === 'Acelerou' ? 's-concluido' : 's-iniciar') : ''], ['Força', d.forca], ['Foco', d.no_principal], ['Ensina', d.ensina], ['Risco', d.risco]].forEach(([k, v]) => {
+        if (!v) return; dl.append(el('dt', null, k)); const dd = el('dd'); if (v instanceof Node) dd.appendChild(v); else dd.textContent = v; dl.appendChild(dd);
+      });
+      c.appendChild(dl);
+      const m = metas(p.id);
+      const mb = el('div', 'pes-metas');
+      [['Trilha', m.trilha], ['PDI', m.pdi]].forEach(([k, v]) => { const r = el('div', 'pm'); const tr = el('span', 'track'); const i = el('i'); i.style.width = v + '%'; i.style.background = v >= 80 ? 'var(--ok)' : v >= 50 ? 'var(--blue)' : 'var(--warn)'; tr.appendChild(i); r.append(el('span', 'pm-l', k), tr, el('b', null, v + '%')); mb.appendChild(r); });
+      c.appendChild(mb);
+      const po = ooList.filter(o => o.pessoa_id === p.id && o.data >= hoje && o.status !== 'Cancelado')[0];
+      const foot = el('div', 'pes-foot');
+      foot.append(el('span', null, po ? fmtDia(po.data) + ' próx. 1:1' : 'sem 1:1'), el('span', null, `${m.feitos}/${m.pdiTotal} objetivos`), el('span', null, reg('anotacao', p.id).length + ' anotação' + (reg('anotacao', p.id).length === 1 ? '' : 'ões')));
+      c.appendChild(foot);
+      const abrir = () => abrirReg('ficha', p.id, f.id ? f : null);
+      c.addEventListener('click', abrir); c.addEventListener('keydown', (e) => { if (e.key === 'Enter') abrir(); });
+      grid.appendChild(c);
+    });
+    b1.appendChild(grid); box.appendChild(b1);
+
+    // PDI
+    const b2 = bloco('PDI H2 2026', 'Versão da pessoa + expectativa do líder anterior. O status muda conforme os 1:1s.', ['+ Adicionar', novoPara('pdi')]);
+    b2.appendChild(tabela([
+      { l: 'Pessoa', f: r => nomeDe(r.pessoa_id), cls: 'b' }, { l: '#', f: r => r.ordem, cls: 'n' }, { l: 'Objetivo', f: r => r.dados.objetivo, cls: 'b' },
+      { l: 'Ação', f: r => r.dados.acao }, { l: 'Meta / evidência', f: r => r.dados.meta }, { l: 'Revisão', f: r => r.dados.revisao, cls: 'm' }, { l: 'Status', f: r => pill(r.dados.status, statusCls(r.dados.status)) }
+    ], regP('pdi'), r => abrirReg('pdi', r.pessoa_id, r)));
+    box.appendChild(b2);
+
+    // Agenda + Feedbacks lado a lado
+    const duo = el('div', 'duo');
+    const b3 = bloco('Agenda de 1:1s', 'Quinzenal, sempre com o PDI na pauta. Clique para editar pauta, anotações e combinados.', ['+ Novo 1:1', () => abrirOO(null, admPessoa !== 'todos' ? admPessoa : null)]);
+    const chk = el('label', 'chk'); const cb = el('input'); cb.type = 'checkbox'; cb.checked = verPassados; cb.id = 'adm-ver-passados'; cb.addEventListener('change', () => { verPassados = cb.checked; renderEquipe(); }); chk.append(cb, ' Mostrar os que já passaram'); b3.appendChild(chk);
+    const oos = ooList.filter(o => filtroPessoa(o.pessoa_id) && (verPassados || o.data >= hoje)).sort((a, b) => a.data.localeCompare(b.data));
+    b3.appendChild(tabela([
+      { l: 'Data', f: r => fmtDia(r.data), cls: 'b n' }, { l: 'Pessoa', f: r => nomeDe(r.pessoa_id), cls: 'b' }, { l: 'Encontro', f: r => r.titulo + (r.observacao ? ' · ' + r.observacao : '') },
+      { l: 'Horário', f: r => r.horario, cls: 'm' }, { l: 'Status', f: r => pill(r.status, statusCls(r.status)) }
+    ], oos, r => abrirOO(r), 'Nenhum 1:1 marcado.'));
+    const b4 = bloco('Feedbacks prontos', 'Um positivo e um corretivo por pessoa, no modelo SCI.', ['+ Adicionar', novoPara('feedback')]);
+    const fl = el('div', 'fb-list');
+    regP('feedback').forEach(r => {
+      const it = el('div', 'fb'); it.tabIndex = 0;
+      const top = el('div', 'fb-top'); top.append(el('b', null, nomeDe(r.pessoa_id)), pill(r.dados.tipo, r.dados.tipo === 'Positivo' ? 's-concluido' : 's-andamento'));
+      it.append(top, el('p', null, r.dados.texto));
+      it.addEventListener('click', () => abrirReg('feedback', r.pessoa_id, r)); fl.appendChild(it);
+    });
+    if (!fl.children.length) fl.appendChild(el('p', 'empty', 'Nada registrado ainda.'));
+    b4.appendChild(fl);
+    duo.append(b3, b4); box.appendChild(duo);
+  }
+
+  // ---- Mapa ----
+  function renderMapa() {
+    const box = $('adm-mapa'); box.textContent = '';
+    const b1 = bloco('Como eles se veem × como eu vejo', 'Sua visão e o caminho para o próximo nível. A avaliação deles e a do líder anterior ficam em "Visão deles". Clique para editar.');
+    time().filter(p => filtroPessoa(p.id)).forEach(p => {
+      const mp = reg('mapa', p.id)[0] || { dados: {} };
+      const minha = reg('anotacao', p.id).find(a => a.dados.tipo === 'Minha visão');
+      const c = el('article', 'mapa-card');
+      const h = el('div', 'mapa-h'); h.append(el('h4', null, p.apelido), el('b', 'mapa-niv', (p.cargo_atual || '') + ' → ' + (p.cargo_alvo || ''))); c.appendChild(h);
+      const cols = el('div', 'mapa-cols');
+      const col = (lab, txt, cls, onEdit) => { const d = el('div', 'mapa-col ' + (cls || '')); d.append(el('span', 'lab', lab), el('p', null, txt || '—')); d.tabIndex = 0; d.addEventListener('click', onEdit); cols.appendChild(d); };
+      const eu = minha ? [minha.dados.positivos, minha.dados.atencao ? 'Atenção: ' + minha.dados.atencao : ''].filter(Boolean).join('. ').replace(/\.\./g, '.') : '';
+      col('Como eu vejo', eu, '', () => minha ? abrirReg('anotacao', p.id, minha) : abrirReg('anotacao', p.id, null, true));
+      col('O que falta', mp.dados.falta, '', () => abrirReg('mapa', p.id, mp.id ? mp : null));
+      col('Como conquistar', mp.dados.conquistar, 'destaque', () => abrirReg('mapa', p.id, mp.id ? mp : null));
+      c.appendChild(cols);
+      const det = el('details', 'visao'); det.appendChild(el('summary', null, 'Visão deles (PitStop H1)'));
+      const vg = el('div', 'mapa-cols dois');
+      [['Como se vê', mp.dados.se_ve], ['Líder anterior', mp.dados.lider]].forEach(([l, t]) => { const d = el('div', 'mapa-col'); d.append(el('span', 'lab', l), el('p', null, t || '—')); vg.appendChild(d); });
+      det.appendChild(vg); c.appendChild(det);
+      b1.appendChild(c);
+    });
+    box.appendChild(b1);
+
+    const b2 = bloco('Onde cada um está', 'Comparação com a trilha oficial e os quatro critérios, com base no PitStop H1 e nas suas anotações. Clique para editar.');
+    time().filter(p => filtroPessoa(p.id)).forEach(p => {
+      const pr = reg('promocao', p.id)[0]; const d = pr ? pr.dados : {};
+      const c = el('article', 'mapa-card'); c.tabIndex = 0;
+      const h = el('div', 'mapa-h'); h.append(el('h4', null, p.apelido), el('span', 'mapa-area', p.area || ''), el('b', 'mapa-niv', (p.cargo_atual || '') + ' → ' + (p.cargo_alvo || '')));
+      if (d.leitura) h.appendChild(pill(d.leitura, d.leitura === 'Em construção' ? 's-andamento' : d.leitura === 'Ainda não pronto' ? 'p-alta' : 's-iniciar'));
+      c.appendChild(h);
+      if (d.elegivel) c.appendChild(el('p', 'mapa-eleg', 'Elegibilidade: ' + d.elegivel));
+      const g = el('div', 'onde-grid');
+      [['Já mostra do próximo nível', d.ja_mostra], ['O que falta', d.falta], ['1 · Comportamentos (PitStop)', d.comportamentos], ['2 · Atribuições', d.atribuicoes], ['3 · Espaço no time', d.espaco], ['4 · Defesa', d.defesa], ['Consistência', d.consistencia]].forEach(([l, t]) => {
+        if (!t) return; const x = el('div', 'mapa-col'); x.append(el('span', 'lab', l), el('p', null, t)); g.appendChild(x);
+      });
+      c.appendChild(g);
+      const abrir = () => abrirReg('promocao', p.id, pr || null);
+      c.addEventListener('click', abrir); c.addEventListener('keydown', (e) => { if (e.key === 'Enter') abrir(); });
+      b2.appendChild(c);
+    });
+    box.appendChild(b2);
+  }
+
+  // ---- Planejamento ----
+  function renderPlanejamento() {
+    const box = $('adm-plan'); box.textContent = '';
+    const b1 = bloco('Plano de 90 dias', 'Suas ações por fase, com prazo e status.', ['+ Adicionar', () => abrirReg('plano90', null, null, true)]);
+    b1.appendChild(tabela([{ l: 'Fase', f: r => r.dados.fase, cls: 'b' }, { l: 'Período', f: r => r.dados.periodo, cls: 'm' }, { l: 'Ação', f: r => r.dados.acao }, { l: 'Status', f: r => pill(r.dados.status, statusCls(r.dados.status)) }], reg('plano90', null), r => abrirReg('plano90', null, r)));
+    box.appendChild(b1);
+    const b2 = bloco('Roteiro do 1º 1:1 por pessoa', 'Passos específicos do primeiro 1:1 de cada um.', ['+ Adicionar', novoPara('roteiro')]);
+    const rg = el('div', 'rot-grid');
+    time().filter(p => filtroPessoa(p.id)).forEach(p => {
+      const rs = reg('roteiro', p.id); if (!rs.length) return;
+      const c = el('article', 'rot'); c.appendChild(el('h4', null, p.apelido)); const ol = el('ol');
+      rs.forEach(r => { const li = el('li', null, r.dados.passo); li.tabIndex = 0; li.addEventListener('click', () => abrirReg('roteiro', p.id, r)); ol.appendChild(li); });
+      c.appendChild(ol); rg.appendChild(c);
+    });
+    b2.appendChild(rg.children.length ? rg : el('p', 'empty', 'Nada registrado ainda.')); box.appendChild(b2);
+    const b3 = bloco('Integração com os terceirizados', 'Etapas para conhecer e integrar o time da Comunica.', ['+ Adicionar', () => abrirReg('integracao', null, null, true)]);
+    b3.appendChild(tabela([{ l: '#', f: r => r.ordem, cls: 'n' }, { l: 'Etapa', f: r => r.dados.etapa, cls: 'b' }, { l: 'Ação', f: r => r.dados.acao }, { l: 'Quando', f: r => r.dados.quando, cls: 'm' }], reg('integracao', null), r => abrirReg('integracao', null, r)));
+    box.appendChild(b3);
+    const b4 = bloco('Guia rápido: 1:1, feedback e FUP', null, ['+ Adicionar', () => abrirReg('guia', null, null, true)]);
+    b4.appendChild(tabela([{ l: 'Tema', f: r => r.dados.tema, cls: 'm' }, { l: 'Título', f: r => r.dados.titulo, cls: 'b' }, { l: 'Como fazer', f: r => r.dados.texto }], reg('guia', null), r => abrirReg('guia', null, r)));
+    box.appendChild(b4);
+    const b5 = bloco('Perguntas em aberto', 'Dúvidas sobre a trilha e a promoção, para responder com o gestor e o RH.', ['+ Adicionar', () => abrirReg('pergunta', null, null, true)]);
+    b5.appendChild(tabela([{ l: 'Pergunta', f: r => r.dados.pergunta, cls: 'b' }, { l: 'Quem', f: r => r.dados.quem, cls: 'm' }, { l: 'Status', f: r => pill(r.dados.status, statusCls(r.dados.status)) }, { l: 'Resposta', f: r => r.dados.resposta }], reg('pergunta', null), r => abrirReg('pergunta', null, r)));
+    box.appendChild(b5);
+    const b6 = bloco('Como funciona a promoção', 'Elegibilidade e os quatro critérios passados pelo RH e pelo gestor.', ['+ Adicionar', () => abrirReg('criterio', null, null, true)]);
+    b6.appendChild(tabela([{ l: 'Critério', f: r => r.dados.criterio, cls: 'b' }, { l: 'Pergunta', f: r => r.dados.pergunta }, { l: 'Como avaliar', f: r => r.dados.como_avaliar }], reg('criterio', null), r => abrirReg('criterio', null, r)));
+    box.appendChild(b6);
+  }
+
+  // ---- Minhas anotações ----
+  function renderAnotacoes() {
+    const box = $('adm-anot'); box.textContent = '';
+    const b = bloco('Minhas anotações', 'Suas observações sobre a equipe. Só você vê.', ['+ Nova anotação', novoPara('anotacao')]);
+    const rows = registros.filter(r => r.colecao === 'anotacao' && (admPessoa === 'todos' || r.pessoa_id === admPessoa)).sort((a, b) => String(b.dados.data || '').localeCompare(String(a.dados.data || '')));
+    if (!rows.length) b.appendChild(el('p', 'empty', 'Nenhuma anotação ainda.'));
+    rows.forEach(r => {
+      const c = el('article', 'anot'); c.tabIndex = 0;
+      const h = el('div', 'fb-top'); h.append(el('b', null, r.pessoa_id ? nomeDe(r.pessoa_id) : 'Equipe'), el('span', 'm', r.dados.data ? fmtDia(r.dados.data) : ''), pill(r.dados.tipo || 'Anotação'));
+      c.append(h, el('p', null, r.dados.texto || ''));
+      const g = el('div', 'mapa-cols');
+      [['Pontos fortes', r.dados.positivos], ['Atenção', r.dados.atencao], ['Ações', r.dados.acoes]].forEach(([l, t]) => { if (!t) return; const d = el('div', 'mapa-col'); d.append(el('span', 'lab', l), el('p', null, t)); g.appendChild(d); });
+      if (g.children.length) c.appendChild(g);
+      c.addEventListener('click', () => abrirReg('anotacao', r.pessoa_id || null, r)); b.appendChild(c);
+    });
+    box.appendChild(b);
   }
 
   // ----- Editor de registro -----
   let regAtual = null, regDelArm = false;
-  function abrirReg(col, pid, r) {
+  const PESSOAL = ['ficha', 'mapa', 'pdi', 'promocao', 'anotacao', 'feedback', 'roteiro'];
+  function abrirReg(col, pid, r, escolher) {
     const cfg = COL[col]; regAtual = { col, pid, r }; regDelArm = false;
-    $('rv-title').textContent = (r ? 'Editar · ' : 'Novo · ') + cfg.titulo + (pid ? ' · ' + nomeDe(pid) : '');
+    $('rv-title').textContent = (r ? 'Editar · ' : 'Novo · ') + cfg.titulo + (pid && !escolher ? ' · ' + nomeDe(pid) : '');
     const box = $('rv-campos'); box.textContent = '';
+    if (!r && escolher && PESSOAL.includes(col)) {
+      const f = el('div', 'field'); const l = el('label', null, 'Pessoa'); l.setAttribute('for', 'rv-pessoa');
+      const s = el('select'); s.id = 'rv-pessoa';
+      if (col === 'anotacao') { const o = el('option', null, 'Equipe (geral)'); o.value = ''; s.appendChild(o); }
+      time().forEach(p => { const o = el('option', null, p.apelido); o.value = p.id; s.appendChild(o); });
+      s.value = pid || (col === 'anotacao' ? '' : (time()[0] || {}).id);
+      f.append(l, s); box.appendChild(f);
+    }
     cfg.campos.forEach(([k, lab, tipo]) => {
       const f = el('div', 'field'); const id = 'rv-' + k;
       const l = el('label', null, lab); l.setAttribute('for', id);
@@ -1447,14 +1602,15 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
       f.append(l, inp); box.appendChild(f);
     });
     $('rv-msg').textContent = ''; $('rv-del').hidden = !r; $('rv-del').textContent = 'Excluir'; $('rv-del').className = 'btn ghost';
-    $('rv').hidden = false; box.querySelector('input,textarea,select').focus();
+    $('rv').hidden = false; (box.querySelector('textarea,input') || box.querySelector('select')).focus();
   }
   const fecharReg = () => { $('rv').hidden = true; regAtual = null; };
   $('rv-cancel').addEventListener('click', fecharReg);
   $('rv').addEventListener('click', (e) => { if (e.target === $('rv')) fecharReg(); });
   $('rv-form').addEventListener('submit', async (e) => {
     e.preventDefault(); if (!regAtual) return;
-    const { col, pid, r } = regAtual; const dados = {};
+    const { col, r } = regAtual; const dados = {};
+    const pid = $('rv-pessoa') ? ($('rv-pessoa').value || null) : regAtual.pid;
     COL[col].campos.forEach(([k]) => { dados[k] = $('rv-' + k).value.trim(); });
     $('rv-save').disabled = true;
     let res;
@@ -1465,7 +1621,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     }
     $('rv-save').disabled = false;
     if (res.error || !res.data || !res.data.length) { $('rv-msg').textContent = 'Não foi possível salvar. Tente de novo.'; return; }
-    fecharReg(); toast('Salvo'); carregarCentro();
+    fecharReg(); toast('Salvo'); await carregarCentro();
   });
   $('rv-del').addEventListener('click', async () => {
     if (!regAtual || !regAtual.r) return;
@@ -1482,7 +1638,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('ov1-title').textContent = o ? '1:1 · ' + nomeDe(o.pessoa_id) : 'Novo 1:1';
     const sel = $('ov1-pessoa'); sel.textContent = '';
     pessoasAll.filter(p => p.tem_trilha).forEach(p => { const op = el('option', null, p.apelido); op.value = p.id; sel.appendChild(op); });
-    sel.value = o ? o.pessoa_id : (pid || admPessoa || sel.value); sel.disabled = !!o;
+    sel.value = o ? o.pessoa_id : (pid || (admPessoa !== 'todos' ? admPessoa : '') || (sel.options[0] || {}).value); sel.disabled = !!o;
     $('ov1-data').value = o ? o.data : hojeISO();
     $('ov1-hora').value = o ? o.horario : 'a definir';
     $('ov1-titulo').value = o ? o.titulo : '1:1 quinzenal · revisão do PDI (30 min)';
