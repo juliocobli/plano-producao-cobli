@@ -236,6 +236,48 @@ table.slim { min-width: 640px; }
 .tp-val { color: var(--fg); font-weight: 600; }
 .tp-ex { color: var(--muted); font-style: italic; }
 @media (max-width: 720px) { .tr-checks.aval li { grid-template-columns: 1fr; } }
+.subnav { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 2px solid var(--line); margin: 14px 0 16px; }
+.subnav button { border: 0; background: none; color: var(--muted); font: inherit; font-weight: 700; font-size: .86rem; padding: 8px 12px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.subnav button[aria-current="page"] { color: var(--blue); border-bottom-color: var(--blue); }
+.subnav button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.semana { margin: 16px 0 6px; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.oo-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.oo-item { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.oo-item.clic { cursor: pointer; }
+.oo-item.clic:hover, .oo-item.clic:focus-visible { border-color: var(--blue); outline: none; }
+.oo-item.passado { opacity: .62; }
+.oo-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .86rem; }
+.oo-data { min-width: 5.6rem; font-variant-numeric: tabular-nums; }
+.oo-hora { color: var(--muted); min-width: 4.5rem; }
+.oo-pessoa { color: var(--blue); min-width: 6rem; }
+.oo-tit { flex: 1 1 12rem; min-width: 0; }
+.oo-marcas { display: flex; gap: 4px; }
+.mk { font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; background: var(--neutral-soft); color: var(--muted); border-radius: 999px; padding: 2px 7px; }
+.mk.ok { background: var(--ok-soft); color: var(--ok); }
+.oo-obs { margin: 6px 0 0; font-size: .8rem; color: var(--muted); }
+.oo-comb { margin-top: 8px; padding: 8px 10px; background: var(--blue-soft); border-radius: 8px; font-size: .85rem; }
+.oo-comb .lab { font-size: .66rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--blue); }
+.oo-comb p { margin: 2px 0 0; white-space: pre-line; }
+.pes-corpo { display: flex; flex-direction: column; gap: 14px; }
+.pes-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start; border-top: 4px solid var(--blue); }
+.pes-head h2 { font-family: var(--display); font-weight: 600; font-size: 1.4rem; margin: 2px 0 0; }
+.meta-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 14px; }
+.meta-bar { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.meta-top { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: .86rem; }
+.meta-top b { font-family: var(--display); font-size: 1.6rem; color: var(--blue); }
+.track.big { height: 12px; }
+.meta-bar small { color: var(--muted); font-size: .75rem; }
+.sec-col { padding: 16px 18px; }
+.sec-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.sec-head h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1rem; }
+.reg-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.reg { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.reg.clic { cursor: pointer; }
+.reg.clic:hover, .reg.clic:focus-visible { border-color: var(--blue); outline: none; }
+.reg dl { margin: 0; display: grid; grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr); gap: 4px 12px; font-size: .84rem; }
+.reg dt { color: var(--muted); font-weight: 700; font-size: .74rem; padding-top: 2px; }
+.reg dd { margin: 0; white-space: pre-line; }
+@media (max-width: 560px) { .reg dl { grid-template-columns: 1fr; } .pes-head { grid-template-columns: 1fr; } }
 .poli-leg { display: flex; gap: 14px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); margin: 6px 0 12px; }
 .poli-leg span { display: inline-flex; align-items: center; gap: 6px; }
 table.poli { min-width: 860px; font-size: .8rem; }
@@ -286,6 +328,7 @@ table.slim tr:hover td { background: transparent; }
       <nav class="ub-tabs" aria-label="Seções">
         <button type="button" class="ub-tab" data-view="plano" id="tab-plano">Plano</button>
         <button type="button" class="ub-tab" data-view="trilha" id="tab-trilha" hidden>Minha trilha</button>
+        <button type="button" class="ub-tab" data-view="meus" id="tab-meus" hidden>Meus 1:1</button>
         <button type="button" class="ub-tab" data-view="poli" id="tab-poli" hidden>Polivalência</button>
         <button type="button" class="ub-tab" data-view="admin" id="tab-admin" hidden>Painel admin</button>
       </nav>
@@ -380,7 +423,29 @@ table.slim tr:hover td { background: transparent; }
       <div><h2>Painel admin</h2></div>
       <button type="button" class="btn ghost" id="voltar">← Voltar ao plano</button>
     </div>
-    <div style="margin-top:12px">
+    <nav class="subnav" id="adm-nav" aria-label="Seções do painel admin">
+      <button type="button" data-sub="agenda">Agenda de 1:1</button>
+      <button type="button" data-sub="pessoas">Pessoas</button>
+      <button type="button" data-sub="restritos">Assuntos restritos</button>
+      <button type="button" data-sub="geral">Geral</button>
+      <button type="button" data-sub="acessos">Acessos e histórico</button>
+    </nav>
+    <div class="adm-sub" data-sub="agenda">
+      <div class="tools">
+        <button type="button" class="btn" id="adm-novo-oo">+ Novo 1:1</button>
+        <label class="chk"><input type="checkbox" id="adm-ver-passados"> Mostrar 1:1 que já passaram</label>
+      </div>
+      <div id="adm-agenda-lista"></div>
+      <p class="empty" id="adm-agenda-vazio" hidden>Nenhum 1:1 marcado.</p>
+    </div>
+    <div class="adm-sub" data-sub="pessoas" hidden>
+      <div class="chips" id="adm-pessoa-chips" style="margin-bottom:12px"></div>
+      <div id="adm-pessoa-corpo" class="pes-corpo"></div>
+    </div>
+    <div class="adm-sub" data-sub="geral" hidden>
+      <div id="adm-geral-corpo" class="pes-corpo"></div>
+    </div>
+    <div class="adm-sub" data-sub="restritos" hidden>
       <div class="tools"><button type="button" class="btn" id="priv-add">+ Novo assunto</button></div>
       <div class="tablewrap">
         <table>
@@ -389,7 +454,9 @@ table.slim tr:hover td { background: transparent; }
         </table>
       </div>
       <p class="empty" id="priv-empty" hidden>Nenhum assunto aqui.</p>
-      <h3 class="hist-title">Pessoas e acessos</h3>
+    </div>
+    <div class="adm-sub" data-sub="acessos" hidden>
+      <h3 class="hist-title" style="margin-top:0">Pessoas e acessos</h3>
       <p class="sub">Ligue cada pessoa ao e-mail com que ela entra no site. Sem isso, ela não vê os próprios assuntos nem a trilha.</p>
       <div class="tablewrap">
         <table class="slim">
@@ -467,6 +534,19 @@ table.slim tr:hover td { background: transparent; }
     </section>
   </div>
 </section>
+<section id="meus" class="trilha" hidden>
+  <div class="card tr-head">
+    <div class="tr-who">
+      <span class="tr-eyebrow">Meus 1:1</span>
+      <h2>Agenda de 1:1 com o Júlio</h2>
+      <p class="tr-cargo" id="meus-prox"></p>
+    </div>
+  </div>
+  <div class="card">
+    <p class="sub" style="margin-top:0">A cada 15 dias, sempre falando do seu desenvolvimento. Os combinados de cada conversa ficam registrados aqui.</p>
+    <ul class="oo-lista" id="meus-lista"></ul>
+  </div>
+</section>
 <section id="poli" class="trilha" hidden>
   <div class="card">
     <h2>Matriz de polivalência</h2>
@@ -504,6 +584,45 @@ table.slim tr:hover td { background: transparent; }
       <button type="button" class="btn ghost" id="f-cancel">Cancelar</button>
       <span class="spacer"></span>
       <button type="button" class="btn ghost" id="f-del">Excluir</button>
+    </div>
+  </form>
+</div>
+<div class="overlay" id="rv" hidden>
+  <form class="drawer" id="rv-form" aria-labelledby="rv-title">
+    <h2 id="rv-title">Registro</h2>
+    <div id="rv-campos" style="display:flex;flex-direction:column;gap:12px"></div>
+    <p class="msg" id="rv-msg"></p>
+    <div class="actions">
+      <button type="submit" class="btn" id="rv-save">Salvar</button>
+      <button type="button" class="btn ghost" id="rv-cancel">Cancelar</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" id="rv-del">Excluir</button>
+    </div>
+  </form>
+</div>
+<div class="overlay" id="ov1" hidden>
+  <form class="drawer" id="ov1-form" aria-labelledby="ov1-title">
+    <h2 id="ov1-title">1:1</h2>
+    <div class="field"><label for="ov1-pessoa">Pessoa</label><select id="ov1-pessoa"></select></div>
+    <div class="row2">
+      <div class="field"><label for="ov1-data">Data</label><input id="ov1-data" type="date"></div>
+      <div class="field"><label for="ov1-hora">Horário</label><input id="ov1-hora" placeholder="Ex.: 14h00"></div>
+    </div>
+    <div class="field"><label for="ov1-titulo">Tipo de conversa</label><input id="ov1-titulo"></div>
+    <div class="row2">
+      <div class="field"><label for="ov1-status">Status</label><select id="ov1-status"><option>Agendado</option><option>A confirmar</option><option>Realizado</option><option>Remarcado</option><option>Cancelado</option></select></div>
+      <div class="field" id="ov1-rep-f"><label for="ov1-rep">Repetir a cada 15 dias</label><input id="ov1-rep" type="number" min="0" max="26" value="0"><span class="hint">Quantos encontros a mais criar</span></div>
+    </div>
+    <div class="field"><label for="ov1-obs">Observação</label><input id="ov1-obs" placeholder="Ex.: antecipado por feriado"><span class="hint">A pessoa vê</span></div>
+    <div class="field"><label for="ov1-pauta">Pauta</label><textarea id="ov1-pauta"></textarea><span class="hint">Só você vê</span></div>
+    <div class="field"><label for="ov1-anot">Anotações do 1:1</label><textarea id="ov1-anot" style="min-height:110px"></textarea><span class="hint">Só você vê</span></div>
+    <div class="field"><label for="ov1-comb">Combinados</label><textarea id="ov1-comb"></textarea><span class="hint">A pessoa vê na aba "Meus 1:1"</span></div>
+    <p class="msg" id="ov1-msg"></p>
+    <div class="actions">
+      <button type="submit" class="btn" id="ov1-save">Salvar</button>
+      <button type="button" class="btn ghost" id="ov1-cancel">Cancelar</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" id="ov1-del">Excluir</button>
     </div>
   </form>
 </div>
@@ -618,16 +737,20 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (v === 'admin' && !isAdmin) v = 'plano';
     if (v === 'trilha' && !(isAdmin || (minha && minha.tem_trilha))) v = 'plano';
     if (v === 'poli' && !isMembro) v = 'plano';
+    if (v === 'meus' && (isAdmin || !ooList.length)) v = 'plano';
     view = v;
     $('pub').hidden = view !== 'plano';
     $('priv').hidden = view !== 'admin';
     $('trilha').hidden = view !== 'trilha';
     $('poli').hidden = view !== 'poli';
+    $('meus').hidden = view !== 'meus';
     $('poli-menu').hidden = true;
     document.querySelectorAll('.ub-tab').forEach(b => b.setAttribute('aria-current', b.dataset.view === view ? 'page' : 'false'));
     try { history.replaceState(null, '', location.pathname + (view === 'plano' ? '' : '#' + view)); } catch {}
     if (view === 'trilha') renderTrilha();
     if (view === 'poli') renderPoli();
+    if (view === 'meus') renderMeus();
+    if (view === 'admin') renderAdmin();
     window.scrollTo(0, 0);
   }
   document.querySelectorAll('.ub-tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
@@ -689,7 +812,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     renderHist();
   }
   let extrasT = null;
-  const recarregarExtras = () => { clearTimeout(extrasT); extrasT = setTimeout(() => carregarPessoas(), 400); };
+  const recarregarExtras = () => { clearTimeout(extrasT); extrasT = setTimeout(async () => { await carregarPessoas(); await carregarCentro(); }, 400); };
   let recarregarT = null;
   const recarregar = () => { clearTimeout(recarregarT); recarregarT = setTimeout(() => { carregar(); carregarHist(); }, 300); };
   function assinar() {
@@ -697,7 +820,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     canal = sb.channel('plano-' + Math.random().toString(36).slice(2))
       .on('postgres_changes', { event: '*', schema: 'public', table: 'assuntos' }, recarregar)
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'plano_sinal' }, recarregar);
-    ['trilha_auto', 'trilha_gestor', 'polivalencia', 'pessoas'].forEach(tb => { canal = canal.on('postgres_changes', { event: '*', schema: 'public', table: tb }, recarregarExtras); });
+    ['trilha_auto', 'trilha_gestor', 'polivalencia', 'pessoas', 'matriz_pessoas', 'one_on_ones', 'one_on_ones_privado', 'registros'].forEach(tb => { canal = canal.on('postgres_changes', { event: '*', schema: 'public', table: tb }, recarregarExtras); });
     if (isAdmin) canal = canal.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'historico' }, recarregar);
     canal.subscribe();
   }
@@ -714,6 +837,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     isAdmin = a.data === true; isMembro = m.data === true;
     $('add').hidden = !isMembro;
     await carregarPessoas();
+    await carregarCentro();
     $('ro').hidden = isAdmin || (isMembro && !!minha);
     $('ro').textContent = !isMembro ? 'Seu e-mail ainda não tem acesso ao plano. Fale com o Júlio.' : 'Seu e-mail ainda não está ligado a um nome do time, por isso você não vê seus assuntos nem sua trilha. Fale com o Júlio.';
     $('tab-admin').hidden = !isAdmin;
@@ -722,7 +846,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('tab-trilha').textContent = isAdmin ? 'Trilhas' : 'Minha trilha';
     $('tb-title').textContent = isAdmin ? 'Todos os assuntos' : 'Meus assuntos';
     $('tb-sub').textContent = isAdmin ? 'Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.' : 'Os assuntos em que você está envolvido. Os números e gráficos acima mostram o plano inteiro.';
-    setView(({ '#admin': 'admin', '#trilha': 'trilha', '#poli': 'poli' })[location.hash] || 'plano');
+    setView(({ '#admin': 'admin', '#trilha': 'trilha', '#poli': 'poli', '#meus': 'meus' })[location.hash] || 'plano');
     await carregar(); await carregarHist();
     assinar();
   }
@@ -1123,6 +1247,288 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     });
   }
 
+  // ---------- Centro de dados (admin) e 1:1 ----------
+  const DIAS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+  const fmtDia = (iso) => { const [y, m, d] = String(iso).split('-').map(Number); const dt = new Date(y, m - 1, d); return DIAS[dt.getDay()] + ' ' + String(d).padStart(2, '0') + '/' + String(m).padStart(2, '0'); };
+  const hojeISO = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const somaDias = (iso, n) => { const [y, m, d] = iso.split('-').map(Number); const dt = new Date(y, m - 1, d + n); return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); };
+  const OO_STATUS = ['Agendado', 'A confirmar', 'Realizado', 'Remarcado', 'Cancelado'];
+  const ooCls = { 'Agendado': 's-iniciar', 'A confirmar': 's-andamento', 'Realizado': 's-concluido', 'Remarcado': 's-andamento', 'Cancelado': 'p-alta' };
+  const nomeDe = (pid) => (pessoasAll.find(p => p.id === pid) || {}).apelido || pid || 'Equipe';
+
+  const COL = {
+    ficha: { titulo: 'Ficha', unico: true, campos: [['admissao', 'Admissão', 'date'], ['classificacao', 'Avaliação H1'], ['forca', 'Força'], ['no_principal', 'Ponto de atenção principal'], ['ensina', 'Pode ensinar'], ['aprende', 'Precisa aprender'], ['risco', 'Risco']] },
+    mapa: { titulo: 'Mapa: onde está e como chegar lá', unico: true, campos: [['se_ve', 'Como se vê (autoavaliação H1)', 'area'], ['lider', 'Visão do líder anterior', 'area'], ['falta', 'O que falta', 'area'], ['conquistar', 'Como conquistar', 'area']] },
+    pdi: { titulo: 'PDI H2 2026', campos: [['objetivo', 'Objetivo'], ['acao', 'Ação', 'area'], ['meta', 'Meta'], ['revisao', 'Revisão'], ['status', 'Status', ['Não iniciado', 'Em andamento', 'Concluído']]] },
+    promocao: { titulo: 'Promoção', unico: true, campos: [['leitura', 'Leitura'], ['elegivel', 'Elegível'], ['comportamentos', 'Comportamentos do nível', 'area'], ['atribuicoes', 'Atribuições técnicas', 'area'], ['espaco', 'Espaço no time', 'area'], ['defesa', 'Defesa (resultados)', 'area'], ['consistencia', 'Consistência', 'area'], ['ja_mostra', 'Já mostra', 'area'], ['falta', 'O que falta', 'area']] },
+    anotacao: { titulo: 'Anotações', campos: [['data', 'Data', 'date'], ['tipo', 'Tipo', ['Minha visão', 'Direção', '1:1', 'Feedback', 'Outro']], ['texto', 'Texto', 'area'], ['positivos', 'Pontos fortes', 'area'], ['atencao', 'Atenção', 'area'], ['acoes', 'Ações', 'area'], ['original', 'Texto original', 'area']] },
+    feedback: { titulo: 'Feedbacks prontos (SCI)', campos: [['tipo', 'Tipo', ['Positivo', 'Corretivo']], ['texto', 'Texto', 'area']] },
+    roteiro: { titulo: 'Roteiro do 1º 1:1', campos: [['passo', 'Passo', 'area']] },
+    plano90: { titulo: 'Plano de 90 dias', campos: [['fase', 'Fase'], ['periodo', 'Período'], ['acao', 'Ação', 'area'], ['status', 'Status', ['A fazer', 'Em andamento', 'Feito']]] },
+    pergunta: { titulo: 'Perguntas em aberto', campos: [['pergunta', 'Pergunta', 'area'], ['quem', 'Quem responde'], ['status', 'Status', ['Aberta', 'Respondida']], ['resposta', 'Resposta', 'area']] },
+    criterio: { titulo: 'Critérios de promoção', campos: [['criterio', 'Critério'], ['pergunta', 'Pergunta', 'area'], ['como_avaliar', 'Como avaliar', 'area']] },
+    guia: { titulo: 'Guia de 1:1 e feedback', campos: [['tema', 'Tema'], ['titulo', 'Título'], ['texto', 'Texto', 'area']] },
+    integracao: { titulo: 'Integração dos terceirizados', campos: [['etapa', 'Etapa'], ['acao', 'Ação', 'area'], ['quando', 'Quando']] }
+  };
+  let registros = [], ooList = [], ooPriv = new Map(), admSub = 'agenda', admPessoa = null, verPassados = false;
+
+  async function carregarCentro() {
+    const reqs = [sb.from('one_on_ones').select('*').order('data')];
+    if (isAdmin) reqs.push(sb.from('one_on_ones_privado').select('*'), sb.from('registros').select('*').order('ordem'));
+    const [oo, op, rg] = await Promise.all(reqs);
+    ooList = (oo && oo.data) || [];
+    if (isAdmin) { ooPriv = new Map(((op && op.data) || []).map(r => [r.oo_id, r])); registros = (rg && rg.data) || []; }
+    $('tab-meus').hidden = isAdmin || !ooList.length;
+    if (view === 'meus') renderMeus();
+    if (view === 'admin') renderAdmin();
+  }
+
+  // ----- Meus 1:1 (cada pessoa) -----
+  function renderMeus() {
+    const box = $('meus-lista'); box.textContent = '';
+    const hoje = hojeISO();
+    const prox = ooList.filter(o => o.data >= hoje && o.status !== 'Cancelado');
+    $('meus-prox').textContent = prox.length ? 'Próximo: ' + fmtDia(prox[0].data) + ' · ' + prox[0].horario + ' · ' + prox[0].titulo : 'Nenhum 1:1 futuro marcado.';
+    ooList.forEach(o => {
+      const li = el('li', 'oo-item' + (o.data < hoje ? ' passado' : ''));
+      const top = el('div', 'oo-top');
+      top.append(el('b', 'oo-data', fmtDia(o.data)), el('span', 'oo-hora', o.horario), el('span', 'oo-tit', o.titulo));
+      const st = el('span', 'pill ' + (ooCls[o.status] || 's-iniciar'), o.status); top.appendChild(st);
+      li.appendChild(top);
+      if (o.observacao) li.appendChild(el('p', 'oo-obs', o.observacao));
+      if (o.combinados) { const c = el('div', 'oo-comb'); c.append(el('span', 'lab', 'Combinados'), el('p', null, o.combinados)); li.appendChild(c); }
+      box.appendChild(li);
+    });
+  }
+
+  // ----- Painel admin -----
+  function setSub(s) { admSub = s; renderAdmin(); }
+  document.querySelectorAll('#adm-nav button').forEach(b => b.addEventListener('click', () => setSub(b.dataset.sub)));
+  function renderAdmin() {
+    document.querySelectorAll('#adm-nav button').forEach(b => b.setAttribute('aria-current', b.dataset.sub === admSub ? 'page' : 'false'));
+    document.querySelectorAll('.adm-sub').forEach(d => { d.hidden = d.dataset.sub !== admSub; });
+    if (admSub === 'agenda') renderAgenda();
+    if (admSub === 'pessoas') renderPessoaAdm();
+    if (admSub === 'geral') renderGeral();
+  }
+
+  function ooLinha(o, comPessoa) {
+    const li = el('li', 'oo-item' + (o.data < hojeISO() ? ' passado' : ''));
+    const top = el('div', 'oo-top');
+    top.append(el('b', 'oo-data', fmtDia(o.data)), el('span', 'oo-hora', o.horario));
+    if (comPessoa) top.appendChild(el('b', 'oo-pessoa', nomeDe(o.pessoa_id)));
+    top.appendChild(el('span', 'oo-tit', o.titulo));
+    top.appendChild(el('span', 'pill ' + (ooCls[o.status] || 's-iniciar'), o.status));
+    const pv = ooPriv.get(o.id);
+    const marcas = el('span', 'oo-marcas');
+    if (pv && pv.pauta) marcas.appendChild(el('span', 'mk', 'Pauta'));
+    if (pv && pv.anotacoes) marcas.appendChild(el('span', 'mk', 'Anotações'));
+    if (o.combinados) marcas.appendChild(el('span', 'mk ok', 'Combinados'));
+    top.appendChild(marcas);
+    li.appendChild(top);
+    if (o.observacao) li.appendChild(el('p', 'oo-obs', o.observacao));
+    li.tabIndex = 0; li.classList.add('clic');
+    li.addEventListener('click', () => abrirOO(o));
+    li.addEventListener('keydown', (e) => { if (e.key === 'Enter') abrirOO(o); });
+    return li;
+  }
+  function renderAgenda() {
+    const box = $('adm-agenda-lista'); box.textContent = '';
+    const hoje = hojeISO();
+    const lista = ooList.filter(o => verPassados || o.data >= hoje).sort((a, b) => a.data.localeCompare(b.data) || nomeDe(a.pessoa_id).localeCompare(nomeDe(b.pessoa_id)));
+    $('adm-agenda-vazio').hidden = lista.length > 0;
+    let semana = null, ul = null;
+    lista.forEach(o => {
+      const [y, m, d] = o.data.split('-').map(Number); const dt = new Date(y, m - 1, d); dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
+      const seg = String(dt.getDate()).padStart(2, '0') + '/' + String(dt.getMonth() + 1).padStart(2, '0');
+      if (seg !== semana) { semana = seg; box.appendChild(el('h4', 'semana', 'Semana de ' + seg)); ul = el('ul', 'oo-lista'); box.appendChild(ul); }
+      ul.appendChild(ooLinha(o, true));
+    });
+  }
+  $('adm-ver-passados').addEventListener('change', (e) => { verPassados = e.target.checked; renderAgenda(); });
+  $('adm-novo-oo').addEventListener('click', () => abrirOO(null, null));
+
+  function pct(n, d) { return d ? Math.round(n / d * 100) : 0; }
+  function barra(rotulo, valor, detalhe) {
+    const w = el('div', 'meta-bar');
+    const t = el('div', 'meta-top'); t.append(el('span', null, rotulo), el('b', null, valor + '%'));
+    const tr = el('div', 'track big'); const i = el('i'); i.style.width = valor + '%'; i.style.background = valor >= 80 ? 'var(--ok)' : valor >= 50 ? 'var(--blue)' : 'var(--warn)'; tr.appendChild(i);
+    w.append(t, tr, el('small', null, detalhe));
+    return w;
+  }
+  function metas(pid) {
+    const itens = trilhaItens.filter(x => x.pessoa_id === pid && x.sec_ordem >= 2 && x.sec_ordem <= 4);
+    let pontos = 0, avaliados = 0;
+    itens.forEach(x => { const s = gestorMap.get(x.id)?.status; if (s) avaliados++; if (s === 'Atende') pontos += 1; if (s === 'Parcial') pontos += 0.5; });
+    const pdi = registros.filter(r => r.colecao === 'pdi' && r.pessoa_id === pid);
+    const feitos = pdi.filter(r => r.dados.status === 'Concluído').length, andamento = pdi.filter(r => r.dados.status === 'Em andamento').length;
+    return { trilha: pct(pontos, itens.length), itens: itens.length, avaliados, pdi: pct(feitos, pdi.length), pdiTotal: pdi.length, feitos, andamento };
+  }
+
+  function renderPessoaAdm() {
+    const comTrilha = pessoasAll.filter(p => p.tem_trilha);
+    if (!admPessoa || !comTrilha.some(p => p.id === admPessoa)) admPessoa = (comTrilha[0] || {}).id || null;
+    const chips = $('adm-pessoa-chips'); chips.textContent = '';
+    comTrilha.forEach(p => {
+      const c = el('button', 'chip', p.apelido); c.type = 'button'; c.setAttribute('aria-pressed', String(p.id === admPessoa));
+      c.addEventListener('click', () => { admPessoa = p.id; renderPessoaAdm(); }); chips.appendChild(c);
+    });
+    const p = pessoasAll.find(x => x.id === admPessoa); const box = $('adm-pessoa-corpo'); box.textContent = '';
+    if (!p) return;
+    const head = el('div', 'card pes-head');
+    const w = el('div'); w.append(el('span', 'tr-eyebrow', p.area || ''), el('h2', null, p.nome), el('p', 'tr-cargo', (p.cargo_atual || '') + ' → próximo cargo: ' + (p.cargo_alvo || '')));
+    const bt = el('button', 'btn ghost', 'Abrir trilha'); bt.type = 'button'; bt.addEventListener('click', () => { trilhaSel = p.id; setView('trilha'); });
+    head.append(w, bt);
+    const m = metas(p.id);
+    const bars = el('div', 'meta-grid');
+    bars.append(barra('Trilha do próximo cargo', m.trilha, `${m.avaliados} de ${m.itens} tópicos avaliados por você (Atende = 100%, Parcial = 50%)`),
+      barra('PDI H2', m.pdi, `${m.feitos} de ${m.pdiTotal} objetivos concluídos · ${m.andamento} em andamento`));
+    head.appendChild(bars);
+    box.appendChild(head);
+
+    // agenda da pessoa
+    const ag = el('section', 'card sec-col');
+    const agh = el('div', 'sec-head'); agh.appendChild(el('h3', null, 'Agenda de 1:1'));
+    const nb = el('button', 'btn ghost', '+ Novo 1:1'); nb.type = 'button'; nb.addEventListener('click', () => abrirOO(null, p.id)); agh.appendChild(nb);
+    ag.appendChild(agh);
+    const ul = el('ul', 'oo-lista'); ooList.filter(o => o.pessoa_id === p.id).forEach(o => ul.appendChild(ooLinha(o, false)));
+    if (!ul.children.length) ag.appendChild(el('p', 'empty', 'Nenhum 1:1 marcado.')); else ag.appendChild(ul);
+    box.appendChild(ag);
+    ['pdi', 'mapa', 'promocao', 'anotacao', 'feedback', 'roteiro', 'ficha'].forEach(c => box.appendChild(secaoColecao(c, p.id)));
+  }
+
+  function renderGeral() {
+    const box = $('adm-geral-corpo'); box.textContent = '';
+    ['plano90', 'pergunta', 'criterio', 'guia', 'integracao'].forEach(c => box.appendChild(secaoColecao(c, null)));
+    box.appendChild(secaoColecao('anotacao', null, 'Anotações gerais (equipe)'));
+  }
+
+  function secaoColecao(col, pid, tituloAlt) {
+    const cfg = COL[col];
+    const rows = registros.filter(r => r.colecao === col && (r.pessoa_id || null) === pid).sort((a, b) => a.ordem - b.ordem);
+    const s = el('section', 'card sec-col');
+    const h = el('div', 'sec-head'); h.appendChild(el('h3', null, tituloAlt || cfg.titulo));
+    if (!cfg.unico || !rows.length) { const b = el('button', 'btn ghost', cfg.unico ? '+ Preencher' : '+ Adicionar'); b.type = 'button'; b.addEventListener('click', () => abrirReg(col, pid, null)); h.appendChild(b); }
+    s.appendChild(h);
+    if (!rows.length) { s.appendChild(el('p', 'empty', 'Nada registrado ainda.')); return s; }
+    const ul = el('ul', 'reg-lista');
+    rows.forEach(r => {
+      const li = el('li', 'reg clic'); li.tabIndex = 0;
+      const dl = el('dl');
+      cfg.campos.forEach(([k, lab, tipo]) => {
+        const v = r.dados[k]; if (v == null || v === '') return;
+        dl.append(el('dt', null, lab));
+        const dd = el('dd'); if (Array.isArray(tipo)) { const sp = el('span', 'pill s-iniciar', v); dd.appendChild(sp); } else dd.textContent = tipo === 'date' ? fmtDia(v) : v;
+        dl.appendChild(dd);
+      });
+      li.appendChild(dl);
+      li.addEventListener('click', () => abrirReg(col, pid, r));
+      li.addEventListener('keydown', (e) => { if (e.key === 'Enter') abrirReg(col, pid, r); });
+      ul.appendChild(li);
+    });
+    s.appendChild(ul);
+    return s;
+  }
+
+  // ----- Editor de registro -----
+  let regAtual = null, regDelArm = false;
+  function abrirReg(col, pid, r) {
+    const cfg = COL[col]; regAtual = { col, pid, r }; regDelArm = false;
+    $('rv-title').textContent = (r ? 'Editar · ' : 'Novo · ') + cfg.titulo + (pid ? ' · ' + nomeDe(pid) : '');
+    const box = $('rv-campos'); box.textContent = '';
+    cfg.campos.forEach(([k, lab, tipo]) => {
+      const f = el('div', 'field'); const id = 'rv-' + k;
+      const l = el('label', null, lab); l.setAttribute('for', id);
+      let inp;
+      if (Array.isArray(tipo)) { inp = el('select'); ['', ...tipo].forEach(o => { const op = el('option', null, o || '—'); op.value = o; inp.appendChild(op); }); }
+      else if (tipo === 'area') inp = el('textarea');
+      else { inp = el('input'); inp.type = tipo === 'date' ? 'date' : 'text'; }
+      inp.id = id; inp.value = (r && r.dados[k]) || (tipo === 'date' && !r ? hojeISO() : '');
+      f.append(l, inp); box.appendChild(f);
+    });
+    $('rv-msg').textContent = ''; $('rv-del').hidden = !r; $('rv-del').textContent = 'Excluir'; $('rv-del').className = 'btn ghost';
+    $('rv').hidden = false; box.querySelector('input,textarea,select').focus();
+  }
+  const fecharReg = () => { $('rv').hidden = true; regAtual = null; };
+  $('rv-cancel').addEventListener('click', fecharReg);
+  $('rv').addEventListener('click', (e) => { if (e.target === $('rv')) fecharReg(); });
+  $('rv-form').addEventListener('submit', async (e) => {
+    e.preventDefault(); if (!regAtual) return;
+    const { col, pid, r } = regAtual; const dados = {};
+    COL[col].campos.forEach(([k]) => { dados[k] = $('rv-' + k).value.trim(); });
+    $('rv-save').disabled = true;
+    let res;
+    if (r) res = await sb.from('registros').update({ dados }).eq('id', r.id).select('id');
+    else {
+      const ordem = Math.max(0, ...registros.filter(x => x.colecao === col && (x.pessoa_id || null) === pid).map(x => x.ordem || 0)) + 1;
+      res = await sb.from('registros').insert({ colecao: col, pessoa_id: pid, ordem, dados }).select('id');
+    }
+    $('rv-save').disabled = false;
+    if (res.error || !res.data || !res.data.length) { $('rv-msg').textContent = 'Não foi possível salvar. Tente de novo.'; return; }
+    fecharReg(); toast('Salvo'); carregarCentro();
+  });
+  $('rv-del').addEventListener('click', async () => {
+    if (!regAtual || !regAtual.r) return;
+    if (!regDelArm) { regDelArm = true; $('rv-del').textContent = 'Confirmar exclusão'; $('rv-del').className = 'btn danger'; return; }
+    const { error } = await sb.from('registros').delete().eq('id', regAtual.r.id);
+    if (error) { $('rv-msg').textContent = 'Não foi possível excluir.'; return; }
+    fecharReg(); toast('Excluído'); carregarCentro();
+  });
+
+  // ----- Editor de 1:1 -----
+  let ooAtual = null, ooDelArm = false;
+  function abrirOO(o, pid) {
+    ooAtual = o; ooDelArm = false;
+    $('ov1-title').textContent = o ? '1:1 · ' + nomeDe(o.pessoa_id) : 'Novo 1:1';
+    const sel = $('ov1-pessoa'); sel.textContent = '';
+    pessoasAll.filter(p => p.tem_trilha).forEach(p => { const op = el('option', null, p.apelido); op.value = p.id; sel.appendChild(op); });
+    sel.value = o ? o.pessoa_id : (pid || admPessoa || sel.value); sel.disabled = !!o;
+    $('ov1-data').value = o ? o.data : hojeISO();
+    $('ov1-hora').value = o ? o.horario : 'a definir';
+    $('ov1-titulo').value = o ? o.titulo : '1:1 quinzenal · revisão do PDI (30 min)';
+    $('ov1-status').value = o ? o.status : 'Agendado';
+    $('ov1-obs').value = o ? o.observacao : '';
+    const pv = o ? ooPriv.get(o.id) : null;
+    $('ov1-pauta').value = pv ? pv.pauta : ''; $('ov1-anot').value = pv ? pv.anotacoes : '';
+    $('ov1-comb').value = o ? o.combinados : '';
+    $('ov1-rep-f').hidden = !!o; $('ov1-rep').value = '0';
+    $('ov1-msg').textContent = ''; $('ov1-del').hidden = !o; $('ov1-del').textContent = 'Excluir'; $('ov1-del').className = 'btn ghost';
+    $('ov1').hidden = false; $('ov1-data').focus();
+  }
+  const fecharOO = () => { $('ov1').hidden = true; ooAtual = null; };
+  $('ov1-cancel').addEventListener('click', fecharOO);
+  $('ov1').addEventListener('click', (e) => { if (e.target === $('ov1')) fecharOO(); });
+  $('ov1-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const base = { pessoa_id: $('ov1-pessoa').value, data: $('ov1-data').value, horario: $('ov1-hora').value.trim() || 'a definir', titulo: $('ov1-titulo').value.trim() || '1:1', status: $('ov1-status').value, observacao: $('ov1-obs').value.trim(), combinados: $('ov1-comb').value.trim() };
+    if (!base.data) { $('ov1-msg').textContent = 'Escolha a data.'; return; }
+    const priv = { pauta: $('ov1-pauta').value.trim(), anotacoes: $('ov1-anot').value.trim() };
+    $('ov1-save').disabled = true;
+    try {
+      if (ooAtual) {
+        const r1 = await sb.from('one_on_ones').update(base).eq('id', ooAtual.id).select('id');
+        if (r1.error || !r1.data.length) throw r1.error;
+        const r2 = await sb.from('one_on_ones_privado').upsert({ oo_id: ooAtual.id, ...priv }, { onConflict: 'oo_id' });
+        if (r2.error) throw r2.error;
+      } else {
+        const rep = Math.max(0, Math.min(26, parseInt($('ov1-rep').value, 10) || 0));
+        const linhas = [base]; for (let i = 1; i <= rep; i++) linhas.push({ ...base, data: somaDias(base.data, 14 * i), combinados: '' });
+        const r1 = await sb.from('one_on_ones').insert(linhas).select('id');
+        if (r1.error || !r1.data.length) throw r1.error;
+        if (priv.pauta || priv.anotacoes) { const r2 = await sb.from('one_on_ones_privado').upsert({ oo_id: r1.data[0].id, ...priv }, { onConflict: 'oo_id' }); if (r2.error) throw r2.error; }
+      }
+      fecharOO(); toast('1:1 salvo'); carregarCentro();
+    } catch { $('ov1-msg').textContent = 'Não foi possível salvar. Tente de novo.'; }
+    finally { $('ov1-save').disabled = false; }
+  });
+  $('ov1-del').addEventListener('click', async () => {
+    if (!ooAtual) return;
+    if (!ooDelArm) { ooDelArm = true; $('ov1-del').textContent = 'Confirmar exclusão'; $('ov1-del').className = 'btn danger'; return; }
+    const { error } = await sb.from('one_on_ones').delete().eq('id', ooAtual.id);
+    if (error) { $('ov1-msg').textContent = 'Não foi possível excluir.'; return; }
+    fecharOO(); toast('1:1 excluído'); carregarCentro();
+  });
+
   // ---------- Editor ----------
   function openEditor(item, preset) {
     if (!isMembro) { toast('Seu e-mail não tem permissão para editar'); return; }
@@ -1178,7 +1584,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   });
   $('f-cancel').addEventListener('click', closeEditor);
   $('ov').addEventListener('click', (e) => { if (e.target === $('ov')) closeEditor(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('ov').hidden) closeEditor(); });
+  document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (!$('ov').hidden) closeEditor(); if (!$('rv').hidden) fecharReg(); if (!$('ov1').hidden) fecharOO(); });
   $('f-del').addEventListener('click', async () => {
     if (!editing) return;
     if (!delArmed) { delArmed = true; $('f-del').textContent = 'Confirmar exclusão'; $('f-del').className = 'btn danger'; return; }
