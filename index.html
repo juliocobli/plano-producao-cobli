@@ -435,6 +435,8 @@ table.poli td.tot { font-weight: 800; color: var(--blue); }
 .poli-risco li small { display: block; color: var(--muted); }
 table.slim input { width: 100%; min-width: 14rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 6px 8px; font: inherit; font-size: .85rem; }
 table.slim tr { cursor: default; }
+table.slim select { border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 6px 8px; font: inherit; font-size: .85rem; }
+table.slim select.sem-liga { border-color: var(--alta); background: var(--alta-soft); }
 table.slim tr:hover td { background: transparent; }
 .pubwrap { display: flex; flex-direction: column; gap: 22px; }
 #btn-admin[aria-pressed="true"] { background: #fff; color: var(--navy); }
@@ -572,7 +574,16 @@ table.slim tr:hover td { background: transparent; }
       <p class="empty" id="priv-empty" hidden>Nenhum assunto aqui.</p>
     </div>
     <div class="adm-sub" data-sub="acessos" hidden>
-      <h3 class="hist-title" style="margin-top:0">Pessoas e acessos</h3>
+      <h3 class="hist-title" style="margin-top:0">Quem já entrou</h3>
+      <p class="sub">Todas as contas que já fizeram login. Se a coluna "Ligada a" estiver vazia, a pessoa só vê o que é do time: escolha quem ela é e salve.</p>
+      <div class="tablewrap">
+        <table class="slim">
+          <thead><tr><th>Nome no login</th><th>E-mail</th><th>Último acesso</th><th>Ligada a</th></tr></thead>
+          <tbody id="tb-contas"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="contas-msg" hidden></p>
+      <h3 class="hist-title">Pessoas e acessos</h3>
       <p class="sub">Ligue cada pessoa ao e-mail com que ela entra no site. Sem isso, ela não vê os próprios assuntos nem a trilha.</p>
       <div class="tablewrap">
         <table class="slim">
@@ -1340,6 +1351,35 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('poli-menu').hidden = true; });
   window.addEventListener('scroll', () => { $('poli-menu').hidden = true; }, { passive: true });
 
+  async function renderContas() {
+    const tb = $('tb-contas'); const msg = $('contas-msg');
+    const { data, error } = await sb.rpc('contas_login');
+    tb.textContent = '';
+    if (error) { msg.hidden = false; msg.textContent = 'Para ver esta lista, rode o arquivo atualizacao-acessos.sql no Supabase.'; return; }
+    msg.hidden = (data || []).length > 0; msg.textContent = 'Ninguém entrou ainda.';
+    (data || []).forEach(c => {
+      const tr = el('tr'); tr.className = 'static';
+      const nm = el('td', 'as', c.nome || '—');
+      const st = el('td');
+      const sel = el('select'); sel.id = 'liga-' + c.email; sel.setAttribute('aria-label', 'Ligar ' + c.email + ' a uma pessoa');
+      const vazio = el('option', null, '— não ligada —'); vazio.value = ''; sel.appendChild(vazio);
+      pessoasAll.forEach(p => { const o = el('option', null, p.apelido); o.value = p.id; sel.appendChild(o); });
+      sel.value = c.pessoa_id || '';
+      if (!c.pessoa_id) sel.classList.add('sem-liga');
+      sel.addEventListener('change', async () => {
+        const antigo = c.pessoa_id, novo = sel.value || null;
+        if (antigo && antigo !== novo) { const r = await sb.from('pessoas').update({ email: null }).eq('id', antigo); if (r.error) { toast('Não foi possível salvar'); return; } }
+        if (novo) { const r = await sb.from('pessoas').update({ email: String(c.email).toLowerCase() }).eq('id', novo); if (r.error) { toast(r.error.code === '23505' ? 'Esse e-mail já está ligado a outra pessoa' : 'Não foi possível salvar'); return; } }
+        toast(novo ? c.email + ' ligada a ' + nomeDe(novo) : 'Conta desligada');
+        await carregarPessoas(); renderContas();
+      });
+      st.appendChild(sel);
+      let quando = '—'; try { if (c.ultimo_login) quando = new Date(c.ultimo_login).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); } catch {}
+      tr.append(nm, el('td', null, c.email), el('td', 'when', quando), st);
+      tb.appendChild(tr);
+    });
+  }
+
   function renderPessoas() {
     const tb = $('tb-pessoas'); tb.textContent = '';
     pessoasAll.forEach(p => {
@@ -1457,6 +1497,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (admSub === 'mapa') renderMapa();
     if (admSub === 'planejamento') renderPlanejamento();
     if (admSub === 'anotacoes') renderAnotacoes();
+    if (admSub === 'acessos') renderContas();
   }
 
   // blocos de montagem
