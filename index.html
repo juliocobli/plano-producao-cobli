@@ -210,6 +210,57 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
 .tr-checks li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; font-size: .86rem; align-items: start; }
 .tr-checks li::before { content: ""; width: 14px; height: 14px; margin-top: 2px; border: 2px solid var(--blue); border-radius: 4px; }
 table.slim { min-width: 640px; }
+.tr-cols { grid-template-columns: 1fr; }
+.tr-aval h2 { margin: 0; }
+.tr-aval-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.tr-aval-acoes { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.chk { display: flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 600; cursor: pointer; }
+.tr-checks.aval li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 8px 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.tr-checks.aval li::before { display: none; }
+.tr-checks.aval li:last-child { border-bottom: 0; }
+.tr-checks.aval li.div { background: var(--warn-soft); margin: 0 -10px; padding: 10px; border-radius: 8px; }
+.tp-txt { font-weight: 600; }
+.tp-txt .div-tag { display: inline-block; margin-left: 6px; font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; background: var(--warn); color: #fff; border-radius: 999px; padding: 1px 7px; vertical-align: 1px; }
+.tp-ctrl { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tp-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); }
+.tp-row > .lab { min-width: 6.5rem; font-weight: 700; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; border-right: 1px solid var(--line); background: var(--panel); color: var(--fg); font: inherit; font-size: .76rem; font-weight: 600; padding: 5px 9px; cursor: pointer; }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--blue); color: #fff; }
+.seg button[aria-pressed="true"].s-bad { background: var(--alta); }
+.seg button[aria-pressed="true"].s-mid { background: var(--warn); }
+.seg button[aria-pressed="true"].s-ok { background: var(--ok); }
+.seg button:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.tp-row input { flex: 1 1 12rem; min-width: 0; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 5px 8px; font: inherit; font-size: .8rem; }
+.tp-val { color: var(--fg); font-weight: 600; }
+.tp-ex { color: var(--muted); font-style: italic; }
+@media (max-width: 720px) { .tr-checks.aval li { grid-template-columns: 1fr; } }
+.poli-leg { display: flex; gap: 14px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); margin: 6px 0 12px; }
+.poli-leg span { display: inline-flex; align-items: center; gap: 6px; }
+table.poli { min-width: 860px; font-size: .8rem; }
+table.poli th { text-align: center; vertical-align: bottom; white-space: normal; min-width: 4.6rem; font-size: .66rem; }
+table.poli th.lin { border-bottom: 1px solid var(--line); color: var(--blue); }
+table.poli th.nome, table.poli td.nome { text-align: left; min-width: 9rem; position: sticky; left: 0; background: var(--panel); z-index: 1; }
+table.poli td { text-align: center; padding: 6px 4px; }
+table.poli tr { cursor: default; }
+table.poli tr:hover td { background: transparent; }
+table.poli tr.grp td { text-align: left; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: var(--bg); }
+table.poli td.cel button { all: unset; display: inline-flex; padding: 4px; border-radius: 6px; cursor: pointer; }
+table.poli td.cel button:hover, table.poli td.cel button:focus-visible { background: var(--blue-soft); outline: 2px solid var(--blue); }
+table.poli td.tot { font-weight: 800; color: var(--blue); }
+.pie { width: 20px; height: 20px; display: block; }
+.pie .ring { fill: none; stroke: var(--blue); stroke-width: 1.6; }
+.pie .fill { fill: var(--blue); }
+.pie-na { color: var(--muted); font-weight: 700; }
+.poli-menu { position: fixed; z-index: 70; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 8px 24px rgba(4,4,40,.18); padding: 6px; display: flex; flex-direction: column; min-width: 11rem; }
+.poli-menu button { all: unset; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; font-size: .82rem; cursor: pointer; }
+.poli-menu button:hover, .poli-menu button:focus-visible { background: var(--blue-soft); }
+.poli-menu .t { font-size: .7rem; font-weight: 800; color: var(--muted); padding: 4px 8px; text-transform: uppercase; letter-spacing: .05em; }
+.poli-risco { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.poli-risco li { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; border: 1px solid var(--line); border-left: 4px solid var(--alta); border-radius: 8px; padding: 10px 12px; font-size: .86rem; }
+.poli-risco li.ok { border-left-color: var(--ok); }
+.poli-risco li small { display: block; color: var(--muted); }
 table.slim input { width: 100%; min-width: 14rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 6px 8px; font: inherit; font-size: .85rem; }
 table.slim tr { cursor: default; }
 table.slim tr:hover td { background: transparent; }
@@ -235,6 +286,7 @@ table.slim tr:hover td { background: transparent; }
       <nav class="ub-tabs" aria-label="Seções">
         <button type="button" class="ub-tab" data-view="plano" id="tab-plano">Plano</button>
         <button type="button" class="ub-tab" data-view="trilha" id="tab-trilha" hidden>Minha trilha</button>
+        <button type="button" class="ub-tab" data-view="poli" id="tab-poli" hidden>Polivalência</button>
         <button type="button" class="ub-tab" data-view="admin" id="tab-admin" hidden>Painel admin</button>
       </nav>
     </div>
@@ -367,6 +419,24 @@ table.slim tr:hover td { background: transparent; }
       <select id="tr-sel"></select>
     </label>
   </div>
+  <div class="card tr-aval" id="tr-aval-admin" hidden>
+    <div class="tr-aval-top">
+      <div>
+        <h2>Avaliação da trilha</h2>
+        <p class="sub" id="tr-resumo"></p>
+      </div>
+      <div class="tr-aval-acoes">
+        <label class="chk"><input type="checkbox" id="tr-so-div"> Mostrar só divergências</label>
+        <button type="button" class="btn" id="tr-liberar">Liberar minha avaliação</button>
+      </div>
+    </div>
+    <p class="note-ro" id="tr-lib-txt"></p>
+  </div>
+  <div class="card tr-aval" id="tr-aval-pessoa" hidden>
+    <h2>Como usar sua trilha</h2>
+    <p class="sub">Em cada tópico, marque como você se vê hoje: <b>Já faço</b>, <b>Estou desenvolvendo</b> ou <b>Ainda não</b>. Se quiser, escreva onde você mostra isso no dia a dia. O Júlio faz a avaliação dele em separado, e vocês conversam sobre as duas no 1:1.</p>
+    <p class="note-ro" id="tr-lib-pessoa"></p>
+  </div>
   <p class="empty" id="tr-vazio" hidden>Sua trilha ainda não está disponível. Fale com o Júlio.</p>
   <div id="tr-corpo">
     <section class="card tr-sec">
@@ -397,6 +467,20 @@ table.slim tr:hover td { background: transparent; }
     </section>
   </div>
 </section>
+<section id="poli" class="trilha" hidden>
+  <div class="card">
+    <h2>Matriz de polivalência</h2>
+    <p class="sub" id="poli-sub">Nível de cada pessoa em cada posto da linha unificada.</p>
+    <div class="poli-leg" id="poli-leg"></div>
+    <div class="tablewrap"><table class="poli" id="poli-tab"></table></div>
+  </div>
+  <div class="card">
+    <h2>Pontos de risco</h2>
+    <p class="sub">Postos com menos de 2 pessoas que fazem sozinhas (nível 3) ou treinam outros (nível 4).</p>
+    <ul class="poli-risco" id="poli-risco"></ul>
+  </div>
+</section>
+<div class="poli-menu" id="poli-menu" hidden></div>
 </main>
 
 <div class="overlay" id="ov" hidden>
@@ -443,6 +527,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   let items = [], privItems = [], histItems = [];
   let isAdmin = false, isMembro = false, me = null, canal = null, iniciadoPara = null;
   let todos = [], pessoasAll = [], minha = null, trilhaGeral = [], trilhaItens = [], trilhaSel = null;
+  let autoMap = new Map(), gestorMap = new Map(), postos = [], matrizPessoas = [], poliMap = new Map(), soDiv = false;
   const state = { frente: 'Todas', q: '', sort: 'prio-desc', pessoa: '' };
   try { const s = localStorage.getItem('cobli-sort'); if (s) state.sort = s; } catch {}
   const prioRank = { 'Alta': 0, 'Média': 1, 'Baixa': 2 };
@@ -532,13 +617,17 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   function setView(v) {
     if (v === 'admin' && !isAdmin) v = 'plano';
     if (v === 'trilha' && !(isAdmin || (minha && minha.tem_trilha))) v = 'plano';
+    if (v === 'poli' && !isMembro) v = 'plano';
     view = v;
     $('pub').hidden = view !== 'plano';
     $('priv').hidden = view !== 'admin';
     $('trilha').hidden = view !== 'trilha';
+    $('poli').hidden = view !== 'poli';
+    $('poli-menu').hidden = true;
     document.querySelectorAll('.ub-tab').forEach(b => b.setAttribute('aria-current', b.dataset.view === view ? 'page' : 'false'));
     try { history.replaceState(null, '', location.pathname + (view === 'plano' ? '' : '#' + view)); } catch {}
     if (view === 'trilha') renderTrilha();
+    if (view === 'poli') renderPoli();
     window.scrollTo(0, 0);
   }
   document.querySelectorAll('.ub-tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
@@ -571,17 +660,27 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (isAdmin) renderPriv();
   }
   async function carregarPessoas() {
-    const [p, g, it] = await Promise.all([
+    const [p, g, it, au, ge, po, mp, pv] = await Promise.all([
       sb.from('pessoas').select('*').order('nome'),
       sb.from('trilha_geral').select('*').order('secao').order('ordem'),
-      sb.from('trilha_itens').select('*').order('pessoa_id').order('sec_ordem').order('ordem')
+      sb.from('trilha_itens').select('*').order('pessoa_id').order('sec_ordem').order('ordem'),
+      sb.from('trilha_auto').select('*'),
+      sb.from('trilha_gestor').select('*'),
+      sb.from('postos').select('*').order('ordem'),
+      sb.from('matriz_pessoas').select('*').order('ordem'),
+      sb.from('polivalencia').select('*')
     ]);
     pessoasAll = p.data || []; trilhaGeral = g.data || []; trilhaItens = it.data || [];
+    autoMap = new Map((au.data || []).map(r => [r.item_id, r]));
+    gestorMap = new Map((ge.data || []).map(r => [r.item_id, r]));
+    postos = po.data || []; matrizPessoas = mp.data || [];
+    poliMap = new Map((pv.data || []).map(r => [r.pessoa + '|' + r.posto, r.nivel]));
     const meuEmail = String(me?.email || '').toLowerCase();
     minha = pessoasAll.find(x => String(x.email || '').toLowerCase() === meuEmail) || null;
     if (!trilhaSel || !pessoasAll.some(x => x.id === trilhaSel)) trilhaSel = (minha && minha.tem_trilha) ? minha.id : ((pessoasAll.find(x => x.tem_trilha) || {}).id || null);
     if (isAdmin) renderPessoas();
     if (view === 'trilha') renderTrilha();
+    if (view === 'poli') renderPoli();
   }
   async function carregarHist() {
     if (!isAdmin) return;
@@ -589,6 +688,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     histItems = data || [];
     renderHist();
   }
+  let extrasT = null;
+  const recarregarExtras = () => { clearTimeout(extrasT); extrasT = setTimeout(() => carregarPessoas(), 400); };
   let recarregarT = null;
   const recarregar = () => { clearTimeout(recarregarT); recarregarT = setTimeout(() => { carregar(); carregarHist(); }, 300); };
   function assinar() {
@@ -596,6 +697,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     canal = sb.channel('plano-' + Math.random().toString(36).slice(2))
       .on('postgres_changes', { event: '*', schema: 'public', table: 'assuntos' }, recarregar)
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'plano_sinal' }, recarregar);
+    ['trilha_auto', 'trilha_gestor', 'polivalencia', 'pessoas'].forEach(tb => { canal = canal.on('postgres_changes', { event: '*', schema: 'public', table: tb }, recarregarExtras); });
     if (isAdmin) canal = canal.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'historico' }, recarregar);
     canal.subscribe();
   }
@@ -615,11 +717,12 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('ro').hidden = isAdmin || (isMembro && !!minha);
     $('ro').textContent = !isMembro ? 'Seu e-mail ainda não tem acesso ao plano. Fale com o Júlio.' : 'Seu e-mail ainda não está ligado a um nome do time, por isso você não vê seus assuntos nem sua trilha. Fale com o Júlio.';
     $('tab-admin').hidden = !isAdmin;
+    $('tab-poli').hidden = !isMembro;
     $('tab-trilha').hidden = !(isAdmin || (minha && minha.tem_trilha));
     $('tab-trilha').textContent = isAdmin ? 'Trilhas' : 'Minha trilha';
     $('tb-title').textContent = isAdmin ? 'Todos os assuntos' : 'Meus assuntos';
     $('tb-sub').textContent = isAdmin ? 'Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.' : 'Os assuntos em que você está envolvido. Os números e gráficos acima mostram o plano inteiro.';
-    setView(({ '#admin': 'admin', '#trilha': 'trilha' })[location.hash] || 'plano');
+    setView(({ '#admin': 'admin', '#trilha': 'trilha', '#poli': 'poli' })[location.hash] || 'plano');
     await carregar(); await carregarHist();
     assinar();
   }
@@ -800,7 +903,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
     const meus = trilhaItens.filter(x => x.pessoa_id === p.id);
     const sec = (n) => meus.filter(x => x.sec_ordem === n).sort((a, b) => a.ordem - b.ordem);
-    const checks = (rows) => { const ul = el('ul', 'tr-checks'); rows.forEach(r => ul.appendChild(el('li', null, r.topico))); return ul; };
+    const checks = (rows) => { const ul = el('ul', 'tr-checks aval'); rows.forEach(r => ul.appendChild(itemRow(r, p))); return ul; };
     const col = (box, titulo, papel, blocos) => {
       box.textContent = '';
       box.append(el('h3', null, titulo), el('p', 'papel', papel || ''));
@@ -808,11 +911,195 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     };
     col($('tr-col-atual'), 'Hoje: ' + (p.cargo_atual || ''), p.papel_atual, [['Atividades', sec(1)]]);
     col($('tr-col-alvo'), 'Próximo: ' + (p.cargo_alvo || ''), p.papel_alvo, [['Atividades', sec(2)], ['Métricas', sec(3)]]);
-    const comp = $('tr-comp'); comp.textContent = '';
-    sec(4).forEach(r => comp.appendChild(el('li', null, r.topico)));
+    const comp = $('tr-comp'); comp.textContent = ''; comp.className = 'tr-checks aval';
+    sec(4).forEach(r => comp.appendChild(itemRow(r, p)));
+    // Resumo e liberação
+    const avaliaveis = meus.filter(x => x.sec_ordem <= 4);
+    const nAuto = avaliaveis.filter(x => autoMap.get(x.id)?.status).length;
+    const nGest = avaliaveis.filter(x => gestorMap.get(x.id)?.status).length;
+    const nDiv = avaliaveis.filter(x => divergente(x.id)).length;
+    $('tr-aval-admin').hidden = !isAdmin; $('tr-aval-pessoa').hidden = isAdmin;
+    if (isAdmin) {
+      $('tr-resumo').textContent = `${p.apelido} marcou ${nAuto} de ${avaliaveis.length} tópicos. Você avaliou ${nGest}. ${nDiv === 1 ? '1 divergência' : nDiv + ' divergências'} para conversar no 1:1.`;
+      $('tr-liberar').textContent = p.avaliacao_liberada ? 'Ocultar minha avaliação' : 'Liberar minha avaliação para ' + p.apelido;
+      $('tr-liberar').className = p.avaliacao_liberada ? 'btn ghost' : 'btn';
+      $('tr-lib-txt').textContent = p.avaliacao_liberada ? p.apelido + ' já vê a sua avaliação e as suas notas.' : p.apelido + ' ainda não vê a sua avaliação. Libere depois do 1:1.';
+    } else {
+      $('tr-lib-pessoa').textContent = p.avaliacao_liberada ? 'A avaliação do Júlio já foi liberada e aparece em cada tópico.' : 'A avaliação do Júlio aparece aqui depois que vocês conversarem no 1:1.';
+    }
     $('tr-comp-sub').textContent = 'O que se espera de um ' + (p.cargo_alvo || 'próximo nível') + ': trilha oficial do Degreed' + (p.cargo_alvo === 'Assistente III' ? ', mais a linha "Postura e exemplo".' : '.');
   }
   $('tr-sel').addEventListener('change', (e) => { trilhaSel = e.target.value; renderTrilha(); });
+  $('tr-so-div').addEventListener('change', (e) => { soDiv = e.target.checked; renderTrilha(); });
+  $('tr-liberar').addEventListener('click', async () => {
+    const p = pessoasAll.find(x => x.id === trilhaSel); if (!p) return;
+    $('tr-liberar').disabled = true;
+    const { error } = await sb.from('pessoas').update({ avaliacao_liberada: !p.avaliacao_liberada }).eq('id', p.id);
+    $('tr-liberar').disabled = false;
+    if (error) { toast('Não foi possível alterar'); return; }
+    p.avaliacao_liberada = !p.avaliacao_liberada; toast(p.avaliacao_liberada ? 'Avaliação liberada para ' + p.apelido : 'Avaliação ocultada'); renderTrilha();
+  });
+
+  const AUTO = ['Já faço', 'Estou desenvolvendo', 'Ainda não'];
+  const GEST = ['Atende', 'Parcial', 'Não atende'];
+  const nota = { 'Já faço': 2, 'Estou desenvolvendo': 1, 'Ainda não': 0, 'Atende': 2, 'Parcial': 1, 'Não atende': 0 };
+  const tom = (s) => ({ 2: 's-ok', 1: 's-mid', 0: 's-bad' })[nota[s]] || '';
+  const divergente = (id) => { const a = autoMap.get(id)?.status, g = gestorMap.get(id)?.status; return !!(a && g && nota[a] !== nota[g]); };
+  function seg(opcoes, atual, onPick, rotulo) {
+    const s = el('div', 'seg'); s.setAttribute('role', 'group'); s.setAttribute('aria-label', rotulo);
+    opcoes.forEach(o => {
+      const b = el('button', tom(o), o); b.type = 'button'; b.setAttribute('aria-pressed', String(o === atual));
+      b.addEventListener('click', () => onPick(o === atual ? null : o));
+      s.appendChild(b);
+    });
+    return s;
+  }
+  async function salvarAuto(item, campos) {
+    const atual = autoMap.get(item.id) || { status: null, exemplo: '' };
+    const row = { item_id: item.id, pessoa_id: item.pessoa_id, status: atual.status, exemplo: atual.exemplo || '', ...campos };
+    autoMap.set(item.id, row); renderTrilha();
+    const { error } = await sb.from('trilha_auto').upsert(row, { onConflict: 'item_id' });
+    if (error) toast('Não foi possível salvar sua marcação');
+  }
+  async function salvarGestor(item, campos) {
+    const atual = gestorMap.get(item.id) || { status: null, nota: '' };
+    const row = { item_id: item.id, pessoa_id: item.pessoa_id, status: atual.status, nota: atual.nota || '', ...campos };
+    gestorMap.set(item.id, row); renderTrilha();
+    const { error } = await sb.from('trilha_gestor').upsert(row, { onConflict: 'item_id' });
+    if (error) toast('Não foi possível salvar sua avaliação');
+  }
+  function campoTexto(valor, placeholder, onSave, id) {
+    const i = el('input'); i.type = 'text'; i.value = valor || ''; i.placeholder = placeholder; i.id = id; i.setAttribute('aria-label', placeholder);
+    i.addEventListener('change', () => onSave(i.value.trim()));
+    return i;
+  }
+  function itemRow(r, p) {
+    const li = el('li'); const a = autoMap.get(r.id), g = gestorMap.get(r.id);
+    const div = divergente(r.id);
+    if (isAdmin && soDiv && !div) li.hidden = true;
+    if (isAdmin && div) li.classList.add('div');
+    const txt = el('div', 'tp-txt', r.topico);
+    if (isAdmin && div) txt.appendChild(el('span', 'div-tag', 'Divergência'));
+    const ctrl = el('div', 'tp-ctrl');
+    const linha = (lab) => { const d = el('div', 'tp-row'); d.appendChild(el('span', 'lab', lab)); ctrl.appendChild(d); return d; };
+    if (isAdmin) {
+      const l1 = linha(p.apelido + ':');
+      if (a && a.status) l1.appendChild(el('span', 'tp-val', a.status)); else l1.appendChild(el('span', null, 'ainda não marcou'));
+      if (a && a.exemplo) ctrl.appendChild(el('div', 'tp-row tp-ex', '"' + a.exemplo + '"'));
+      const l2 = linha('Sua avaliação:');
+      l2.appendChild(seg(GEST, g && g.status, (s) => salvarGestor(r, { status: s }), 'Sua avaliação'));
+      const l3 = linha('Nota:');
+      l3.appendChild(campoTexto(g && g.nota, 'Evidência ou observação (opcional)', (v) => salvarGestor(r, { nota: v }), 'nota-' + r.id));
+    } else {
+      const l1 = linha('Como me vejo:');
+      l1.appendChild(seg(AUTO, a && a.status, (s) => salvarAuto(r, { status: s }), 'Como me vejo'));
+      const l2 = linha('Onde mostro:');
+      l2.appendChild(campoTexto(a && a.exemplo, 'Exemplo do dia a dia (opcional)', (v) => salvarAuto(r, { exemplo: v }), 'ex-' + r.id));
+      if (p.avaliacao_liberada && g && g.status) {
+        const l3 = linha('Júlio:'); l3.appendChild(el('span', 'tp-val', g.status));
+        if (g.nota) ctrl.appendChild(el('div', 'tp-row tp-ex', g.nota));
+      }
+    }
+    li.append(txt, ctrl);
+    return li;
+  }
+
+  // ---------- Polivalência ----------
+  const NIVEIS = ['Não treinado', 'Em treinamento', 'Faz com apoio', 'Faz sozinho', 'Treina outros'];
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  function pie(n) {
+    const s = document.createElementNS(SVGNS, 'svg'); s.setAttribute('viewBox', '0 0 20 20'); s.setAttribute('class', 'pie'); s.setAttribute('aria-hidden', 'true');
+    const c = document.createElementNS(SVGNS, 'circle'); c.setAttribute('cx', '10'); c.setAttribute('cy', '10'); c.setAttribute('r', '8'); c.setAttribute('class', 'ring'); s.appendChild(c);
+    if (n >= 4) { const f = document.createElementNS(SVGNS, 'circle'); f.setAttribute('cx', '10'); f.setAttribute('cy', '10'); f.setAttribute('r', '8'); f.setAttribute('class', 'fill'); s.appendChild(f); }
+    else if (n > 0) {
+      const ang = n * Math.PI / 2, x = 10 + 8 * Math.sin(ang), y = 10 - 8 * Math.cos(ang);
+      const path = document.createElementNS(SVGNS, 'path');
+      path.setAttribute('d', `M10 10 L10 2 A8 8 0 ${n > 2 ? 1 : 0} 1 ${x.toFixed(2)} ${y.toFixed(2)} Z`); path.setAttribute('class', 'fill'); s.appendChild(path);
+    }
+    return s;
+  }
+  function renderPoli() {
+    $('poli-sub').textContent = 'Nível de cada pessoa em cada posto da linha unificada.' + (isAdmin ? ' Clique em uma célula para mudar o nível.' : '');
+    const leg = $('poli-leg'); leg.textContent = '';
+    NIVEIS.forEach((n, i) => { const sp = el('span'); sp.append(pie(i), i + ' ' + n); leg.appendChild(sp); });
+    const na = el('span'); na.append(el('b', 'pie-na', '–'), ' Ainda não avaliado'); leg.appendChild(na);
+
+    const tab = $('poli-tab'); tab.textContent = '';
+    const thead = el('thead'), h1 = el('tr'), h2 = el('tr');
+    const th0 = el('th', 'nome', 'Pessoa'); th0.rowSpan = 2; h1.appendChild(th0);
+    const linhas = []; postos.forEach(p => { const l = linhas[linhas.length - 1]; if (l && l.nome === p.linha) l.n++; else linhas.push({ nome: p.linha, n: 1 }); });
+    linhas.forEach(l => { const th = el('th', 'lin', l.nome); th.colSpan = l.n; h1.appendChild(th); });
+    const thT = el('th', null, 'Faz sozinho ou treina'); thT.rowSpan = 2; h1.appendChild(thT);
+    postos.forEach(p => { const th = el('th', null, p.posto); th.title = p.faz; h2.appendChild(th); });
+    thead.append(h1, h2); tab.appendChild(thead);
+    const tb = el('tbody');
+    ['Cobli', 'Comunica'].forEach(gr => {
+      const ps = matrizPessoas.filter(m => m.grupo === gr); if (!ps.length) return;
+      const g = el('tr', 'grp'); const gt = el('td', null, gr === 'Cobli' ? 'Coblers' : 'Terceirizados · Comunica'); gt.colSpan = postos.length + 2; g.appendChild(gt); tb.appendChild(g);
+      ps.forEach(m => {
+        const tr = el('tr'); tr.appendChild(el('td', 'nome', m.nome));
+        let dom = 0;
+        postos.forEach(p => {
+          const n = poliMap.get(m.id + '|' + p.id); if (n >= 3) dom++;
+          const td = el('td', 'cel');
+          const conteudo = n == null ? el('span', 'pie-na', '–') : pie(n);
+          const rotulo = `${m.nome}, ${p.posto}: ${n == null ? 'ainda não avaliado' : n + ' ' + NIVEIS[n]}`;
+          if (isAdmin) {
+            const b = el('button'); b.type = 'button'; b.setAttribute('aria-label', rotulo); b.title = rotulo; b.appendChild(conteudo);
+            b.addEventListener('click', (e) => abrirMenu(e.currentTarget, m, p));
+            td.appendChild(b);
+          } else { td.title = rotulo; td.setAttribute('aria-label', rotulo); td.appendChild(conteudo); }
+          tr.appendChild(td);
+        });
+        tr.appendChild(el('td', 'tot', String(dom)));
+        tb.appendChild(tr);
+      });
+    });
+    tab.appendChild(tb);
+
+    const ul = $('poli-risco'); ul.textContent = '';
+    postos.forEach(p => {
+      const fortes = matrizPessoas.filter(m => (poliMap.get(m.id + '|' + p.id) ?? -1) >= 3);
+      if (fortes.length >= 2) return;
+      const li = el('li');
+      const info = el('div'); info.appendChild(el('b', null, p.posto + ' · ' + p.linha));
+      info.appendChild(el('small', null, fortes.length ? `Só ${fortes[0].nome} faz sozinho ou treina outros.` : 'Ninguém avaliado como "faz sozinho" ainda.'));
+      li.appendChild(info);
+      if (isAdmin) {
+        const b = el('button', 'btn ghost', 'Criar assunto de treinamento'); b.type = 'button';
+        b.addEventListener('click', () => openEditor(null, {
+          assunto: 'Treinamento no posto ' + p.posto + ' (' + p.linha + ')', frente: 'Pessoas e time', prioridade: 'Alta',
+          problema: (fortes.length ? 'Só ' + fortes[0].nome + ' faz sozinho ou treina outros no posto ' : 'Ninguém está avaliado como "faz sozinho" no posto ') + p.posto + '. Se essa pessoa faltar, o posto para.',
+          objetivo: 'Ter pelo menos 2 pessoas no nível 3 (faz sozinho) no posto ' + p.posto + '.',
+          como_comecar: 'Escolher quem vai aprender, definir quem treina e acompanhar a evolução pela matriz de polivalência.',
+          envolvidos: fortes.map(f => f.nome).join(', ')
+        }));
+        li.appendChild(b);
+      }
+      ul.appendChild(li);
+    });
+    if (!ul.children.length) { const li = el('li', 'ok', 'Todos os postos têm pelo menos 2 pessoas que fazem sozinhas.'); ul.appendChild(li); }
+  }
+  function abrirMenu(btn, m, p) {
+    const menu = $('poli-menu'); menu.textContent = '';
+    menu.appendChild(el('div', 't', m.nome + ' · ' + p.posto));
+    const escolher = async (n) => {
+      menu.hidden = true;
+      const chave = m.id + '|' + p.id;
+      if (n == null) { poliMap.delete(chave); renderPoli(); const { error } = await sb.from('polivalencia').delete().eq('pessoa', m.id).eq('posto', p.id); if (error) toast('Não foi possível salvar'); }
+      else { poliMap.set(chave, n); renderPoli(); const { error } = await sb.from('polivalencia').upsert({ pessoa: m.id, posto: p.id, nivel: n }, { onConflict: 'pessoa,posto' }); if (error) toast('Não foi possível salvar'); }
+    };
+    NIVEIS.forEach((nome, i) => { const b = el('button'); b.type = 'button'; b.append(pie(i), i + ' ' + nome); b.addEventListener('click', () => escolher(i)); menu.appendChild(b); });
+    const lim = el('button'); lim.type = 'button'; lim.append(el('b', 'pie-na', '–'), 'Ainda não avaliado'); lim.addEventListener('click', () => escolher(null)); menu.appendChild(lim);
+    menu.hidden = false;
+    const r = btn.getBoundingClientRect(), w = menu.offsetWidth, h = menu.offsetHeight;
+    menu.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
+    menu.style.top = (r.bottom + h + 8 > innerHeight ? Math.max(8, r.top - h - 4) : r.bottom + 4) + 'px';
+    menu.querySelector('button').focus();
+  }
+  document.addEventListener('click', (e) => { const m = $('poli-menu'); if (!m.hidden && !m.contains(e.target) && !e.target.closest('td.cel')) m.hidden = true; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('poli-menu').hidden = true; });
+  window.addEventListener('scroll', () => { $('poli-menu').hidden = true; }, { passive: true });
 
   function renderPessoas() {
     const tb = $('tb-pessoas'); tb.textContent = '';
@@ -841,13 +1128,13 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (!isMembro) { toast('Seu e-mail não tem permissão para editar'); return; }
     editing = item || null; delArmed = false;
     $('f-title').textContent = item ? 'Editar assunto' : 'Novo assunto';
-    $('f-assunto').value = item?.assunto || '';
-    $('f-frente').value = item?.frente || (state.frente !== 'Todas' ? state.frente : '');
-    $('f-problema').value = item?.problema || '';
-    $('f-objetivo').value = item?.objetivo || '';
-    $('f-como').value = item?.como_comecar || '';
+    $('f-assunto').value = item?.assunto || preset?.assunto || '';
+    $('f-frente').value = item?.frente || preset?.frente || (state.frente !== 'Todas' ? state.frente : '');
+    $('f-problema').value = item?.problema || preset?.problema || '';
+    $('f-objetivo').value = item?.objetivo || preset?.objetivo || '';
+    $('f-como').value = item?.como_comecar || preset?.como_comecar || '';
     $('f-env').value = item?.envolvidos || preset?.envolvidos || (!isAdmin && minha ? minha.apelido : '');
-    $('f-prio').value = item?.prioridade || 'Média';
+    $('f-prio').value = item?.prioridade || preset?.prioridade || 'Média';
     $('f-status').value = item?.status || 'A iniciar';
     $('f-obs').value = item?.observacoes || '';
     $('f-upd').value = '';
