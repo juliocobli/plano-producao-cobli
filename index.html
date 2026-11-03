@@ -175,6 +175,7 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
 .linkbtn { border: 0; background: none; color: var(--blue); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; padding: 0; }
 .msg.ok { color: var(--ok); }
 .user-box { flex-direction: column; align-items: flex-end; gap: 8px; }
+.ub-top b { color: #fff; }
 .ub-top { display: flex; align-items: center; gap: 10px; }
 .ub-tabs { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
 .user-box .ub-tab { border: 0; background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border-radius: 999px; padding: 5px 12px; font-size: .8rem; }
@@ -335,6 +336,62 @@ details.visao summary { cursor: pointer; color: var(--muted); }
 .rot ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 6px; font-size: .82rem; }
 .rot li { cursor: pointer; }
 .rot li:hover { color: var(--blue); }
+.mt-leg, .mt-cont { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); }
+.mt-leg span, .mt-cont span { display: inline-flex; align-items: center; gap: 6px; }
+.mt-cont b { color: var(--fg); }
+.sq { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.sq.ok, .mt-bar i.ok { background: #1f9d55; }
+.sq.mid, .mt-bar i.mid { background: #e8a317; }
+.sq.bad, .mt-bar i.bad { background: #dc3c3c; }
+.sq.na, .mt-bar i.na { background: repeating-linear-gradient(45deg, #c9cbd6 0 2px, #eceef4 2px 5px); }
+.mt-area { margin: 14px 0 2px; font-size: .92rem; font-weight: 800; }
+.mt-card { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); margin-top: 8px; overflow: hidden; }
+.mt-head { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "nome bar pct" "cont cont pct"; gap: 8px 18px; align-items: center; padding: 14px 18px; }
+.mt-head:hover .mt-nome h4, .mt-head:focus-visible .mt-nome h4 { color: var(--blue); }
+.mt-head:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.mt-nome { grid-area: nome; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.mt-nome h4 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.3rem; }
+.mt-nome b { font-size: .8rem; }
+.mt-bar { grid-area: bar; display: flex; gap: 2px; height: 12px; border-radius: 6px; overflow: hidden; min-width: 8rem; }
+.mt-bar i { display: block; height: 100%; }
+.mt-pct { grid-area: pct; text-align: right; }
+.mt-pct b { display: block; font-family: var(--display); font-size: 1.5rem; font-weight: 600; color: var(--fg); }
+.mt-pct span { font-size: .78rem; color: var(--muted); }
+.mt-cont { grid-area: cont; }
+.mt-corpo { border-top: 1px solid var(--line); padding: 6px 18px 14px; }
+.mt-sec { margin: 14px 0 6px; font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.mt-itens { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.mt-itens li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: .84rem; }
+.mt-itens li:last-child { border-bottom: 0; }
+.mt-itens li.div { background: var(--warn-soft); margin: 0 -10px; padding: 7px 10px; border-radius: 6px; }
+.mt-chip { border: 1px solid transparent; border-radius: 999px; padding: 3px 10px; font: inherit; font-size: .74rem; font-weight: 700; cursor: pointer; justify-self: start; display: inline-flex; align-items: center; gap: 6px; }
+.mt-chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.mt-chip.ok { background: var(--ok-soft); color: #1f7a45; border-color: #9fd6b5; }
+.mt-chip.mid { background: var(--warn-soft); color: var(--warn); border-color: #f0cf8e; }
+.mt-chip.bad { background: var(--alta-soft); color: var(--alta); border-color: #f3b0b8; }
+.mt-chip.na { background: var(--neutral-soft); color: var(--muted); border-color: var(--line); }
+.mt-chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.mt-tx { display: flex; flex-direction: column; gap: 2px; }
+.mt-nota { color: var(--muted); font-style: italic; font-size: .76rem; }
+.mt-auto { font-size: .74rem; font-weight: 700; color: var(--blue); white-space: nowrap; }
+.mt-auto.vazio { color: var(--muted); font-weight: 500; }
+@media (max-width: 640px) { .mt-head { grid-template-columns: 1fr auto; grid-template-areas: "nome pct" "bar bar" "cont cont"; } .mt-itens li { grid-template-columns: 1fr; gap: 4px; } }
+.crit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 12px; }
+.crit { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--panel); cursor: pointer; display: flex; flex-direction: column; gap: 4px; font-size: .82rem; }
+.crit:hover { border-color: var(--blue); }
+.crit-n { color: var(--muted); font-size: .76rem; }
+.crit b { font-size: .92rem; }
+.crit p { margin: 0; }
+.crit-como { color: var(--muted); font-style: italic; }
+.mainnav { background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+.mainnav-in { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.mainnav-in::-webkit-scrollbar { display: none; }
+.mainnav .ub-tab { flex: none; border: 0; background: none; color: var(--muted); font: inherit; font-weight: 700; font-size: .9rem; padding: 14px 12px 12px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+.mainnav .ub-tab:hover { color: var(--fg); }
+.mainnav .ub-tab[aria-current="page"] { color: var(--blue); border-bottom-color: var(--blue); }
+.mainnav .ub-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: -4px; }
+.adm-area { display: flex; flex-direction: column; gap: 4px; }
+.adm-resumo { margin: 0 0 6px; }
 .poli-leg { display: flex; gap: 14px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); margin: 6px 0 12px; }
 .poli-leg span { display: inline-flex; align-items: center; gap: 6px; }
 table.poli { min-width: 860px; font-size: .8rem; }
@@ -382,16 +439,23 @@ table.slim tr:hover td { background: transparent; }
     </div>
     <div class="user-box" id="user-box" hidden>
       <div class="ub-top"><b id="user-name"></b><button type="button" id="sair">Sair</button></div>
-      <nav class="ub-tabs" aria-label="Seções">
-        <button type="button" class="ub-tab" data-view="plano" id="tab-plano">Plano</button>
-        <button type="button" class="ub-tab" data-view="trilha" id="tab-trilha" hidden>Minha trilha</button>
-        <button type="button" class="ub-tab" data-view="meus" id="tab-meus" hidden>Meus 1:1</button>
-        <button type="button" class="ub-tab" data-view="poli" id="tab-poli" hidden>Polivalência</button>
-        <button type="button" class="ub-tab" data-view="admin" id="tab-admin" hidden>Painel admin</button>
-      </nav>
     </div>
   </div>
 </header>
+<nav class="mainnav" id="mainnav" aria-label="Seções" hidden>
+  <div class="wrap mainnav-in">
+    <button type="button" class="ub-tab" data-view="plano" id="tab-plano">Plano</button>
+    <button type="button" class="ub-tab adm-tab" data-view="admin" data-sub="equipe" hidden>Equipe Coblers</button>
+    <button type="button" class="ub-tab adm-tab" data-view="admin" data-sub="mapa" hidden>Mapa</button>
+    <button type="button" class="ub-tab" data-view="trilha" id="tab-trilha" hidden>Minha trilha</button>
+    <button type="button" class="ub-tab" data-view="meus" id="tab-meus" hidden>Meus 1:1</button>
+    <button type="button" class="ub-tab" data-view="poli" id="tab-poli" hidden>Polivalência</button>
+    <button type="button" class="ub-tab adm-tab" data-view="admin" data-sub="planejamento" hidden>Planejamento</button>
+    <button type="button" class="ub-tab adm-tab" data-view="admin" data-sub="anotacoes" hidden>Minhas anotações</button>
+    <button type="button" class="ub-tab adm-tab" data-view="admin" data-sub="restritos" hidden>Assuntos restritos</button>
+    <button type="button" class="ub-tab adm-tab" data-view="admin" data-sub="acessos" hidden>Acessos</button>
+  </div>
+</nav>
 
 <section class="wrap auth" id="auth" data-mode="entrar">
   <form class="auth-card" id="a-form">
@@ -474,21 +538,8 @@ table.slim tr:hover td { background: transparent; }
   </section>
 
   </div>
-<section class="card lock" id="priv" hidden>
-    <div class="lock-head">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-      <div><h2>Painel admin</h2></div>
-      <button type="button" class="btn ghost" id="voltar">← Voltar ao plano</button>
-    </div>
+<section class="adm-area" id="priv" hidden>
     <p class="sub adm-resumo" id="adm-resumo"></p>
-    <nav class="subnav" id="adm-nav" aria-label="Seções do painel admin">
-      <button type="button" data-sub="equipe">Equipe Coblers</button>
-      <button type="button" data-sub="mapa">Mapa</button>
-      <button type="button" data-sub="planejamento">Planejamento</button>
-      <button type="button" data-sub="anotacoes">Minhas anotações</button>
-      <button type="button" data-sub="restritos">Assuntos restritos</button>
-      <button type="button" data-sub="acessos">Acessos e histórico</button>
-    </nav>
     <div class="chips" id="adm-pessoa-chips" style="margin-bottom:16px"></div>
     <div class="adm-sub" data-sub="equipe"><div id="adm-equipe" class="adm-corpo"></div></div>
     <div class="adm-sub" data-sub="mapa" hidden><div id="adm-mapa" class="adm-corpo"></div></div>
@@ -531,9 +582,7 @@ table.slim tr:hover td { background: transparent; }
       <h2 id="tr-nome">—</h2>
       <p class="tr-cargo" id="tr-cargo"></p>
     </div>
-    <label class="sortbox" id="tr-sel-box" for="tr-sel" hidden>Pessoa
-      <select id="tr-sel"></select>
-    </label>
+    <div class="chips" id="tr-chips" hidden></div>
   </div>
   <div class="card tr-aval" id="tr-aval-admin" hidden>
     <div class="tr-aval-top">
@@ -744,7 +793,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     authMsg('');
   }
   function showAuth(mode) {
-    $('app').hidden = true; $('auth').hidden = false; $('user-box').hidden = true;
+    $('app').hidden = true; $('auth').hidden = false; $('user-box').hidden = true; $('mainnav').hidden = true;
     showAuthMode(mode || 'entrar');
     if (!configurado) authMsg('Site ainda não configurado: cole a Project URL e a chave anon do Supabase no topo do arquivo index.html.');
     else if (!sb) authMsg('Não foi possível carregar o Supabase. Verifique a internet e recarregue a página.');
@@ -782,8 +831,10 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     } finally { $('a-btn').disabled = false; }
   });
   let view = 'plano';
-  function setView(v) {
+  const SUBS = ['equipe', 'mapa', 'planejamento', 'anotacoes', 'restritos', 'acessos'];
+  function setView(v, sub) {
     if (v === 'admin' && !isAdmin) v = 'plano';
+    if (v === 'admin' && sub) admSub = sub;
     if (v === 'trilha' && !(isAdmin || (minha && minha.tem_trilha))) v = 'plano';
     if (v === 'poli' && !isMembro) v = 'plano';
     if (v === 'meus' && (isAdmin || !ooList.length)) v = 'plano';
@@ -794,16 +845,16 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('poli').hidden = view !== 'poli';
     $('meus').hidden = view !== 'meus';
     $('poli-menu').hidden = true;
-    document.querySelectorAll('.ub-tab').forEach(b => b.setAttribute('aria-current', b.dataset.view === view ? 'page' : 'false'));
-    try { history.replaceState(null, '', location.pathname + (view === 'plano' ? '' : '#' + view)); } catch {}
+    document.querySelectorAll('.ub-tab').forEach(b => b.setAttribute('aria-current', b.dataset.view === view && (view !== 'admin' || b.dataset.sub === admSub) ? 'page' : 'false'));
+    try { history.replaceState(null, '', location.pathname + (view === 'plano' ? '' : '#' + (view === 'admin' ? admSub : view))); } catch {}
+    const atual = document.querySelector('.ub-tab[aria-current="page"]'); if (atual) atual.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     if (view === 'trilha') renderTrilha();
     if (view === 'poli') renderPoli();
     if (view === 'meus') renderMeus();
     if (view === 'admin') renderAdmin();
     window.scrollTo(0, 0);
   }
-  document.querySelectorAll('.ub-tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
-  $('voltar').addEventListener('click', () => setView('plano'));
+  document.querySelectorAll('.ub-tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view, b.dataset.sub)));
   $('sair').addEventListener('click', async () => { setView('plano'); await sb.auth.signOut(); });
   $('a-google').addEventListener('click', async () => {
     if (!sb) return;
@@ -889,13 +940,15 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     await carregarCentro();
     $('ro').hidden = isAdmin || (isMembro && !!minha);
     $('ro').textContent = !isMembro ? 'Seu e-mail ainda não tem acesso ao plano. Fale com o Júlio.' : 'Seu e-mail ainda não está ligado a um nome do time, por isso você não vê seus assuntos nem sua trilha. Fale com o Júlio.';
-    $('tab-admin').hidden = !isAdmin;
+    document.querySelectorAll('.adm-tab').forEach(b => { b.hidden = !isAdmin; });
+    $('mainnav').hidden = false;
     $('tab-poli').hidden = !isMembro;
     $('tab-trilha').hidden = !(isAdmin || (minha && minha.tem_trilha));
-    $('tab-trilha').textContent = isAdmin ? 'Trilhas' : 'Minha trilha';
+    $('tab-trilha').textContent = isAdmin ? 'Trilha' : 'Minha trilha';
     $('tb-title').textContent = isAdmin ? 'Todos os assuntos' : 'Meus assuntos';
     $('tb-sub').textContent = isAdmin ? 'Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.' : 'Os assuntos em que você está envolvido. Os números e gráficos acima mostram o plano inteiro.';
-    setView(({ '#admin': 'admin', '#trilha': 'trilha', '#poli': 'poli', '#meus': 'meus' })[location.hash] || 'plano');
+    const h = location.hash.slice(1);
+    if (SUBS.includes(h)) setView('admin', h); else if (h === 'admin') setView('admin', 'equipe'); else setView(({ trilha: 'trilha', poli: 'poli', meus: 'meus' })[h] || 'plano');
     await carregar(); await carregarHist();
     assinar();
   }
@@ -1044,12 +1097,10 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   // ---------- Trilha ----------
   const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
   function renderTrilha() {
-    const sel = $('tr-sel'), comTrilha = pessoasAll.filter(p => p.tem_trilha);
-    $('tr-sel-box').hidden = !isAdmin;
+    $('tr-chips').hidden = !isAdmin;
     if (isAdmin) {
-      sel.textContent = '';
-      comTrilha.forEach(p => { const o = el('option', null, p.apelido); o.value = p.id; sel.appendChild(o); });
-      if (trilhaSel) sel.value = trilhaSel;
+      const ch = $('tr-chips'); ch.textContent = '';
+      time().forEach(p => { const c = el('button', 'chip', p.apelido); c.type = 'button'; c.setAttribute('aria-pressed', String(p.id === trilhaSel)); c.addEventListener('click', () => { trilhaSel = p.id; renderTrilha(); }); ch.appendChild(c); });
     }
     const p = pessoasAll.find(x => x.id === (isAdmin ? trilhaSel : (minha && minha.id)));
     $('tr-vazio').hidden = !!(p && p.tem_trilha); $('tr-corpo').hidden = !(p && p.tem_trilha);
@@ -1102,7 +1153,6 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     }
     $('tr-comp-sub').textContent = 'O que se espera de um ' + (p.cargo_alvo || 'próximo nível') + ': trilha oficial do Degreed' + (p.cargo_alvo === 'Assistente III' ? ', mais a linha "Postura e exemplo".' : '.');
   }
-  $('tr-sel').addEventListener('change', (e) => { trilhaSel = e.target.value; renderTrilha(); });
   $('tr-so-div').addEventListener('change', (e) => { soDiv = e.target.checked; renderTrilha(); });
   $('tr-liberar').addEventListener('click', async () => {
     const p = pessoasAll.find(x => x.id === trilhaSel); if (!p) return;
@@ -1359,9 +1409,9 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     return w;
   }
   function metas(pid) {
-    const itens = trilhaItens.filter(x => x.pessoa_id === pid && x.sec_ordem >= 2 && x.sec_ordem <= 4);
+    const itens = trilhaItens.filter(x => x.pessoa_id === pid && x.sec_ordem <= 4);
     let pontos = 0, avaliados = 0;
-    itens.forEach(x => { const s = gestorMap.get(x.id)?.status; if (s) avaliados++; if (s === 'Atende') pontos += 1; if (s === 'Parcial') pontos += 0.5; });
+    itens.forEach(x => { const s = gestorMap.get(x.id)?.status; if (s) avaliados++; if (s === 'Atende') pontos += 1; });
     const pdi = registros.filter(r => r.colecao === 'pdi' && r.pessoa_id === pid);
     const feitos = pdi.filter(r => r.dados.status === 'Concluído').length, andamento = pdi.filter(r => r.dados.status === 'Em andamento').length;
     return { trilha: pct(pontos, itens.length), itens: itens.length, avaliados, pdi: pct(feitos, pdi.length), pdiTotal: pdi.length, feitos, andamento };
@@ -1430,7 +1480,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const box = $('adm-equipe'); box.textContent = '';
     const hoje = hojeISO();
     // Pessoas
-    const b1 = bloco('Pessoas', 'Base: PitStops H1 2026. Clique no cartão para editar. As porcentagens são só suas: trilha pela sua avaliação (Atende = 100%, Parcial = 50%) e PDI concluído.');
+    const b1 = bloco('Pessoas', 'Base: PitStops H1 2026. Clique no cartão para editar. As porcentagens são só suas: tópicos da trilha em que a pessoa atende e objetivos do PDI concluídos.');
     const grid = el('div', 'pes-grid');
     time().filter(p => filtroPessoa(p.id)).forEach(p => {
       const f = (reg('ficha', p.id)[0] || { dados: {} }); const d = f.dados;
@@ -1486,8 +1536,94 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   }
 
   // ---- Mapa ----
+  const ST = ['Atende', 'Parcial', 'Não atende'];
+  const stTone = { 'Atende': 'ok', 'Parcial': 'mid', 'Não atende': 'bad' };
+  const abertos = new Set();
+  function contagem(pid) {
+    const it = trilhaItens.filter(x => x.pessoa_id === pid && x.sec_ordem <= 4);
+    const c = { Atende: 0, Parcial: 0, 'Não atende': 0, aval: 0, total: it.length };
+    it.forEach(x => { const s = gestorMap.get(x.id)?.status; if (s) c[s]++; else c.aval++; });
+    return c;
+  }
+  async function trocarStatus(item) {
+    const atual = gestorMap.get(item.id)?.status || null;
+    const prox = atual == null ? 'Atende' : atual === 'Atende' ? 'Parcial' : atual === 'Parcial' ? 'Não atende' : null;
+    const row = { item_id: item.id, pessoa_id: item.pessoa_id, status: prox, nota: (gestorMap.get(item.id) || {}).nota || '' };
+    gestorMap.set(item.id, row); renderMapa();
+    const { error } = await sb.from('trilha_gestor').upsert(row, { onConflict: 'item_id' });
+    if (error) toast('Não foi possível salvar o status');
+  }
+  function mapaTrilha() {
+    const b = bloco('Mapa de trilha por pessoa', 'Tudo o que a pessoa precisa cumprir para o próximo cargo. Clique na pessoa para abrir os tópicos e clique no status para trocar (A avaliar → Atende → Parcial → Não atende). Ao lado aparece como a pessoa se marcou.');
+    const leg = el('div', 'mt-leg');
+    [['ok', 'Atende'], ['mid', 'Parcial'], ['bad', 'Não atende'], ['na', 'A avaliar']].forEach(([c, l]) => { const s = el('span'); s.append(el('i', 'sq ' + c), l); leg.appendChild(s); });
+    b.appendChild(leg);
+    ['Estoque', 'Produção'].forEach(area => {
+      const ps = time().filter(p => p.area === area && filtroPessoa(p.id)); if (!ps.length) return;
+      b.appendChild(el('h4', 'mt-area', area));
+      ps.forEach(p => {
+        const c = contagem(p.id);
+        const card = el('article', 'mt-card');
+        const head = el('button', 'mt-head'); head.type = 'button'; head.setAttribute('aria-expanded', String(abertos.has(p.id)));
+        const nm = el('div', 'mt-nome'); nm.append(el('h4', null, p.apelido), el('b', null, (p.cargo_atual || '') + ' → ' + (p.cargo_alvo || '')));
+        const bar = el('div', 'mt-bar');
+        [['ok', c.Atende], ['mid', c.Parcial], ['bad', c['Não atende']], ['na', c.aval]].forEach(([k, n]) => { if (!n) return; const s = el('i', k); s.style.flexGrow = n; bar.appendChild(s); });
+        const pc = el('div', 'mt-pct'); pc.append(el('b', null, pct(c.Atende, c.total) + '%'), el('span', null, 'atende'));
+        const lg = el('div', 'mt-cont');
+        [['ok', c.Atende, 'atende'], ['mid', c.Parcial, 'parcial'], ['bad', c['Não atende'], 'não atende'], ['na', c.aval, 'a avaliar']].forEach(([k, n, l]) => { const s = el('span'); s.append(el('i', 'sq ' + k), el('b', null, String(n)), ' ' + l); lg.appendChild(s); });
+        head.append(nm, bar, pc, lg);
+        head.addEventListener('click', () => { abertos.has(p.id) ? abertos.delete(p.id) : abertos.add(p.id); renderMapa(); });
+        card.appendChild(head);
+        if (abertos.has(p.id)) {
+          const corpo = el('div', 'mt-corpo');
+          const secs = [[1, 'Atividades do cargo atual (' + (p.cargo_atual || '') + ')'], [2, 'Atividades do próximo cargo (' + (p.cargo_alvo || '') + ')'], [3, 'Métricas do próximo cargo'], [4, 'Comportamentos de ' + (p.cargo_alvo || 'próximo nível') + ' (trilha)']];
+          secs.forEach(([n, titulo]) => {
+            const it = trilhaItens.filter(x => x.pessoa_id === p.id && x.sec_ordem === n).sort((a, b) => a.ordem - b.ordem); if (!it.length) return;
+            const at = it.filter(x => gestorMap.get(x.id)?.status === 'Atende').length;
+            corpo.appendChild(el('h5', 'mt-sec', titulo + ' · ' + at + '/' + it.length));
+            const ul = el('ul', 'mt-itens');
+            it.forEach(x => {
+              const g = gestorMap.get(x.id) || {}, a = autoMap.get(x.id) || {};
+              const li = el('li', divergente(x.id) ? 'div' : '');
+              const chip = el('button', 'mt-chip ' + (stTone[g.status] || 'na'), g.status || 'A avaliar'); chip.type = 'button';
+              chip.setAttribute('aria-label', 'Status de "' + x.topico + '": ' + (g.status || 'A avaliar') + '. Clique para trocar.');
+              chip.addEventListener('click', (e) => { e.stopPropagation(); trocarStatus(x); });
+              const tx = el('div', 'mt-tx'); tx.appendChild(el('span', null, x.topico));
+              if (g.nota) tx.appendChild(el('small', 'mt-nota', g.nota));
+              const auto = el('span', 'mt-auto' + (a.status ? '' : ' vazio'), a.status ? p.apelido + ': ' + a.status : p.apelido + ' não marcou');
+              li.append(chip, tx, auto); ul.appendChild(li);
+            });
+            corpo.appendChild(ul);
+          });
+          card.appendChild(corpo);
+        }
+        b.appendChild(card);
+      });
+    });
+    return b;
+  }
+  function criteriosCards() {
+    const b = bloco('Como funciona a promoção', 'Orientação do RH e do gestor. Só para os Coblers.', ['+ Adicionar', () => abrirReg('criterio', null, null, true)]);
+    const g = el('div', 'crit-grid');
+    reg('criterio', null).forEach((r, i) => {
+      const c = el('article', 'crit'); c.tabIndex = 0;
+      c.append(el('span', 'crit-n', i === 0 ? 'Antes de tudo' : 'Critério ' + i), el('b', null, r.dados.criterio), el('p', null, r.dados.pergunta), el('p', 'crit-como', r.dados.como_avaliar));
+      c.addEventListener('click', () => abrirReg('criterio', null, r)); g.appendChild(c);
+    });
+    b.appendChild(g.children.length ? g : el('p', 'empty', 'Nada registrado ainda.'));
+    return b;
+  }
+  function requisitosTabela() {
+    const b = bloco('O que é preciso para subir de nível', 'Vale para o Assistente II e para o Assistente III.');
+    const rows = trilhaGeral.filter(x => x.secao === 'subir').sort((a, b) => a.ordem - b.ordem);
+    const w = el('div', 'tablewrap card-tab'); const t = el('table', 'tb-diario'); const h = el('tr'); ['#', 'Requisito', 'Como saber'].forEach(x => h.appendChild(el('th', null, x)));
+    const th = el('thead'); th.appendChild(h); t.appendChild(th); const tb = el('tbody');
+    rows.forEach(r => { const tr = el('tr', 'static'); tr.append(el('td', 'n m', String(r.ordem)), el('td', 'b', r.titulo), el('td', null, r.texto)); tb.appendChild(tr); });
+    t.appendChild(tb); w.appendChild(t); b.appendChild(w); return b;
+  }
   function renderMapa() {
     const box = $('adm-mapa'); box.textContent = '';
+    box.appendChild(mapaTrilha());
     const b1 = bloco('Como eles se veem × como eu vejo', 'Sua visão e o caminho para o próximo nível. A avaliação deles e a do líder anterior ficam em "Visão deles". Clique para editar.');
     time().filter(p => filtroPessoa(p.id)).forEach(p => {
       const mp = reg('mapa', p.id)[0] || { dados: {} };
@@ -1508,6 +1644,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
       b1.appendChild(c);
     });
     box.appendChild(b1);
+    box.appendChild(criteriosCards());
+    box.appendChild(requisitosTabela());
 
     const b2 = bloco('Onde cada um está', 'Comparação com a trilha oficial e os quatro critérios, com base no PitStop H1 e nas suas anotações. Clique para editar.');
     time().filter(p => filtroPessoa(p.id)).forEach(p => {
@@ -1553,9 +1691,6 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const b5 = bloco('Perguntas em aberto', 'Dúvidas sobre a trilha e a promoção, para responder com o gestor e o RH.', ['+ Adicionar', () => abrirReg('pergunta', null, null, true)]);
     b5.appendChild(tabela([{ l: 'Pergunta', f: r => r.dados.pergunta, cls: 'b' }, { l: 'Quem', f: r => r.dados.quem, cls: 'm' }, { l: 'Status', f: r => pill(r.dados.status, statusCls(r.dados.status)) }, { l: 'Resposta', f: r => r.dados.resposta }], reg('pergunta', null), r => abrirReg('pergunta', null, r)));
     box.appendChild(b5);
-    const b6 = bloco('Como funciona a promoção', 'Elegibilidade e os quatro critérios passados pelo RH e pelo gestor.', ['+ Adicionar', () => abrirReg('criterio', null, null, true)]);
-    b6.appendChild(tabela([{ l: 'Critério', f: r => r.dados.criterio, cls: 'b' }, { l: 'Pergunta', f: r => r.dados.pergunta }, { l: 'Como avaliar', f: r => r.dados.como_avaliar }], reg('criterio', null), r => abrirReg('criterio', null, r)));
-    box.appendChild(b6);
   }
 
   // ---- Minhas anotações ----
