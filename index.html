@@ -174,6 +174,45 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
 .auth-links { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .linkbtn { border: 0; background: none; color: var(--blue); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; padding: 0; }
 .msg.ok { color: var(--ok); }
+.user-box { flex-direction: column; align-items: flex-end; gap: 8px; }
+.ub-top { display: flex; align-items: center; gap: 10px; }
+.ub-tabs { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.user-box .ub-tab { border: 0; background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border-radius: 999px; padding: 5px 12px; font-size: .8rem; }
+.user-box .ub-tab[aria-current="page"] { background: #fff; color: var(--navy); }
+.user-box .ub-tab:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.trilha { display: flex; flex-direction: column; gap: 16px; }
+#tr-corpo { display: flex; flex-direction: column; gap: 16px; }
+.tr-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; border-top: 4px solid var(--blue); }
+.tr-eyebrow { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--blue); }
+.tr-head h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; margin: 2px 0 0; }
+.tr-cargo { margin: 4px 0 0; color: var(--muted); font-weight: 600; }
+.tr-cargo b { color: var(--fg); }
+.tr-sec h2 { margin-bottom: 2px; }
+.tr-list { margin: 10px 0 0; padding-left: 1.4rem; display: flex; flex-direction: column; gap: 10px; max-width: 75ch; }
+.tr-list li b { display: block; }
+.tr-list li span { color: var(--muted); }
+.tr-niveis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 10px; margin-top: 10px; }
+.tr-nivel { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.tr-nivel b { display: block; font-size: .92rem; }
+.tr-nivel p { margin: 4px 0 0; font-size: .82rem; color: var(--muted); }
+.tr-nivel .tag { display: inline-block; margin-bottom: 6px; font-size: .66rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; border-radius: 999px; padding: 2px 8px; }
+.tr-nivel.atual { border-color: var(--blue); background: var(--blue-soft); }
+.tr-nivel.atual .tag { background: var(--blue); color: #fff; }
+.tr-nivel.alvo { border-color: var(--ok); }
+.tr-nivel.alvo .tag { background: var(--ok-soft); color: var(--ok); }
+.tr-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 12px; margin-top: 10px; }
+.tr-col { border: 1px solid var(--line); border-radius: 10px; padding: 14px; min-width: 0; }
+.tr-col.alvo { border-color: var(--ok); }
+.tr-col h3 { margin: 0; font-size: .95rem; }
+.tr-col .papel { margin: 6px 0 10px; font-size: .84rem; color: var(--muted); }
+.tr-col h4 { margin: 12px 0 6px; font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.tr-checks { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.tr-checks li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; font-size: .86rem; align-items: start; }
+.tr-checks li::before { content: ""; width: 14px; height: 14px; margin-top: 2px; border: 2px solid var(--blue); border-radius: 4px; }
+table.slim { min-width: 640px; }
+table.slim input { width: 100%; min-width: 14rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 6px 8px; font: inherit; font-size: .85rem; }
+table.slim tr { cursor: default; }
+table.slim tr:hover td { background: transparent; }
 .pubwrap { display: flex; flex-direction: column; gap: 22px; }
 #btn-admin[aria-pressed="true"] { background: #fff; color: var(--navy); }
 .gbtn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border: 1px solid var(--line); background: var(--panel); color: var(--fg); border-radius: 8px; padding: 10px 14px; font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer; }
@@ -191,7 +230,14 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
       <h1>Plano de produção · Weekly</h1>
       <p>Assuntos da All Hands e do chão de fábrica, com objetivo, primeiro passo e responsáveis</p>
     </div>
-    <div class="user-box" id="user-box" hidden><span><b id="user-name"></b></span><button type="button" id="btn-admin" hidden>Painel admin</button><button type="button" id="sair">Sair</button></div>
+    <div class="user-box" id="user-box" hidden>
+      <div class="ub-top"><b id="user-name"></b><button type="button" id="sair">Sair</button></div>
+      <nav class="ub-tabs" aria-label="Seções">
+        <button type="button" class="ub-tab" data-view="plano" id="tab-plano">Plano</button>
+        <button type="button" class="ub-tab" data-view="trilha" id="tab-trilha" hidden>Minha trilha</button>
+        <button type="button" class="ub-tab" data-view="admin" id="tab-admin" hidden>Painel admin</button>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -249,8 +295,8 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
   </section>
 
   <section class="card">
-    <h2>Todos os assuntos</h2>
-    <p class="sub">Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.</p>
+    <h2 id="tb-title">Todos os assuntos</h2>
+    <p class="sub" id="tb-sub">Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.</p>
     <div class="tools">
       <button class="btn" id="add">+ Novo assunto</button>
       <input class="search" id="q" type="search" placeholder="Buscar assunto, pessoa, frente…" aria-label="Buscar">
@@ -291,6 +337,14 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
         </table>
       </div>
       <p class="empty" id="priv-empty" hidden>Nenhum assunto aqui.</p>
+      <h3 class="hist-title">Pessoas e acessos</h3>
+      <p class="sub">Ligue cada pessoa ao e-mail com que ela entra no site. Sem isso, ela não vê os próprios assuntos nem a trilha.</p>
+      <div class="tablewrap">
+        <table class="slim">
+          <thead><tr><th>Pessoa</th><th>Cargo</th><th>E-mail de login</th><th></th></tr></thead>
+          <tbody id="tb-pessoas"></tbody>
+        </table>
+      </div>
       <h3 class="hist-title">Histórico de alterações</h3>
       <p class="sub">Quem alterou, quando e o que mudou. Mostra as 200 alterações mais recentes.</p>
       <div class="tablewrap">
@@ -302,6 +356,47 @@ td.as small.upd-by { display: flex; align-items: center; gap: 6px; flex-wrap: wr
       <p class="empty" id="hist-empty">Nenhuma alteração registrada ainda.</p>
     </div>
   </section>
+<section id="trilha" class="trilha" hidden>
+  <div class="card tr-head">
+    <div class="tr-who">
+      <span class="tr-eyebrow">Trilha de carreira</span>
+      <h2 id="tr-nome">—</h2>
+      <p class="tr-cargo" id="tr-cargo"></p>
+    </div>
+    <label class="sortbox" id="tr-sel-box" for="tr-sel" hidden>Pessoa
+      <select id="tr-sel"></select>
+    </label>
+  </div>
+  <p class="empty" id="tr-vazio" hidden>Sua trilha ainda não está disponível. Fale com o Júlio.</p>
+  <div id="tr-corpo">
+    <section class="card tr-sec">
+      <h2>Postura: o exemplo vem dos Coblers</h2>
+      <p class="sub">Vale para todos os níveis e entra em toda conversa de trilha.</p>
+      <ol class="tr-list" id="tr-postura"></ol>
+    </section>
+    <section class="card tr-sec">
+      <h2>O que cada nível significa</h2>
+      <div class="tr-niveis" id="tr-niveis"></div>
+    </section>
+    <section class="card tr-sec">
+      <h2>Descrição de cargo</h2>
+      <p class="sub">O que o cargo faz hoje e o que muda no próximo, segundo a descrição de cargo de Supply.</p>
+      <div class="tr-cols">
+        <div class="tr-col" id="tr-col-atual"></div>
+        <div class="tr-col alvo" id="tr-col-alvo"></div>
+      </div>
+    </section>
+    <section class="card tr-sec">
+      <h2>O que é preciso para subir de nível</h2>
+      <ol class="tr-list" id="tr-subir"></ol>
+    </section>
+    <section class="card tr-sec">
+      <h2>Comportamentos do próximo nível</h2>
+      <p class="sub" id="tr-comp-sub">Trilha oficial do Degreed, mais a linha "Postura e exemplo".</p>
+      <ul class="tr-checks" id="tr-comp"></ul>
+    </section>
+  </div>
+</section>
 </main>
 
 <div class="overlay" id="ov" hidden>
@@ -347,6 +442,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
   let items = [], privItems = [], histItems = [];
   let isAdmin = false, isMembro = false, me = null, canal = null, iniciadoPara = null;
+  let todos = [], pessoasAll = [], minha = null, trilhaGeral = [], trilhaItens = [], trilhaSel = null;
   const state = { frente: 'Todas', q: '', sort: 'prio-desc', pessoa: '' };
   try { const s = localStorage.getItem('cobli-sort'); if (s) state.sort = s; } catch {}
   const prioRank = { 'Alta': 0, 'Média': 1, 'Baixa': 2 };
@@ -434,15 +530,18 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   });
   let view = 'plano';
   function setView(v) {
-    view = isAdmin && v === 'admin' ? 'admin' : 'plano';
-    $('pub').hidden = view === 'admin';
+    if (v === 'admin' && !isAdmin) v = 'plano';
+    if (v === 'trilha' && !(isAdmin || (minha && minha.tem_trilha))) v = 'plano';
+    view = v;
+    $('pub').hidden = view !== 'plano';
     $('priv').hidden = view !== 'admin';
-    $('btn-admin').textContent = view === 'admin' ? 'Voltar ao plano' : 'Painel admin';
-    $('btn-admin').setAttribute('aria-pressed', String(view === 'admin'));
-    try { history.replaceState(null, '', location.pathname + (view === 'admin' ? '#admin' : '')); } catch {}
+    $('trilha').hidden = view !== 'trilha';
+    document.querySelectorAll('.ub-tab').forEach(b => b.setAttribute('aria-current', b.dataset.view === view ? 'page' : 'false'));
+    try { history.replaceState(null, '', location.pathname + (view === 'plano' ? '' : '#' + view)); } catch {}
+    if (view === 'trilha') renderTrilha();
     window.scrollTo(0, 0);
   }
-  $('btn-admin').addEventListener('click', () => setView(view === 'admin' ? 'plano' : 'admin'));
+  document.querySelectorAll('.ub-tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
   $('voltar').addEventListener('click', () => setView('plano'));
   $('sair').addEventListener('click', async () => { setView('plano'); await sb.auth.signOut(); });
   $('a-google').addEventListener('click', async () => {
@@ -462,12 +561,27 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
   // ---------- Dados ----------
   async function carregar() {
-    const { data, error } = await sb.from('assuntos').select('*').order('ordem');
+    const [res, resumo] = await Promise.all([sb.from('assuntos').select('*').order('ordem'), sb.rpc('resumo_assuntos')]);
+    const { data, error } = res;
     if (error) { $('take').textContent = 'Não foi possível carregar os assuntos. Recarregue a página.'; return; }
     items = data.filter(r => !r.privado);
     privItems = data.filter(r => r.privado);
+    todos = Array.isArray(resumo.data) ? resumo.data : items;
     render();
     if (isAdmin) renderPriv();
+  }
+  async function carregarPessoas() {
+    const [p, g, it] = await Promise.all([
+      sb.from('pessoas').select('*').order('nome'),
+      sb.from('trilha_geral').select('*').order('secao').order('ordem'),
+      sb.from('trilha_itens').select('*').order('pessoa_id').order('sec_ordem').order('ordem')
+    ]);
+    pessoasAll = p.data || []; trilhaGeral = g.data || []; trilhaItens = it.data || [];
+    const meuEmail = String(me?.email || '').toLowerCase();
+    minha = pessoasAll.find(x => String(x.email || '').toLowerCase() === meuEmail) || null;
+    if (!trilhaSel || !pessoasAll.some(x => x.id === trilhaSel)) trilhaSel = (minha && minha.tem_trilha) ? minha.id : ((pessoasAll.find(x => x.tem_trilha) || {}).id || null);
+    if (isAdmin) renderPessoas();
+    if (view === 'trilha') renderTrilha();
   }
   async function carregarHist() {
     if (!isAdmin) return;
@@ -480,7 +594,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   function assinar() {
     if (canal) sb.removeChannel(canal);
     canal = sb.channel('plano-' + Math.random().toString(36).slice(2))
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'assuntos' }, recarregar);
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'assuntos' }, recarregar)
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'plano_sinal' }, recarregar);
     if (isAdmin) canal = canal.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'historico' }, recarregar);
     canal.subscribe();
   }
@@ -495,9 +610,16 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('user-name').textContent = md.nome || md.full_name || md.name || me.email;
     const [a, m] = await Promise.all([sb.rpc('eh_admin'), sb.rpc('eh_membro')]);
     isAdmin = a.data === true; isMembro = m.data === true;
-    $('ro').hidden = isMembro; $('add').hidden = !isMembro;
-    $('btn-admin').hidden = !isAdmin;
-    setView(isAdmin && location.hash === '#admin' ? 'admin' : 'plano');
+    $('add').hidden = !isMembro;
+    await carregarPessoas();
+    $('ro').hidden = isAdmin || (isMembro && !!minha);
+    $('ro').textContent = !isMembro ? 'Seu e-mail ainda não tem acesso ao plano. Fale com o Júlio.' : 'Seu e-mail ainda não está ligado a um nome do time, por isso você não vê seus assuntos nem sua trilha. Fale com o Júlio.';
+    $('tab-admin').hidden = !isAdmin;
+    $('tab-trilha').hidden = !(isAdmin || (minha && minha.tem_trilha));
+    $('tab-trilha').textContent = isAdmin ? 'Trilhas' : 'Minha trilha';
+    $('tb-title').textContent = isAdmin ? 'Todos os assuntos' : 'Meus assuntos';
+    $('tb-sub').textContent = isAdmin ? 'Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.' : 'Os assuntos em que você está envolvido. Os números e gráficos acima mostram o plano inteiro.';
+    setView(({ '#admin': 'admin', '#trilha': 'trilha' })[location.hash] || 'plano');
     await carregar(); await carregarHist();
     assinar();
   }
@@ -532,15 +654,21 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
   function irParaTabela() { $('tb').closest('.card').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
+  const envolveMe = (env) => {
+    if (isAdmin) return true;
+    const meus = (minha && minha.aliases || []).map(norm);
+    return pessoasDe(env).map(norm).some(n => ['time', 'todos', 'coblers'].includes(n) || meus.includes(n));
+  };
   function render() {
-    const total = items.length;
-    const alta = items.filter(i => i.prioridade === 'Alta');
-    const and = items.filter(i => i.status === 'Em andamento').length;
-    const ok = items.filter(i => i.status === 'Concluído').length;
+    const base = todos;
+    const total = base.length;
+    const alta = base.filter(i => i.prioridade === 'Alta');
+    const and = base.filter(i => i.status === 'Em andamento').length;
+    const ok = base.filter(i => i.status === 'Concluído').length;
     const pessoas = new Map();
-    items.forEach(i => pessoasDe(i.envolvidos).forEach(p => pessoas.set(p, (pessoas.get(p) || 0) + 1)));
+    base.forEach(i => pessoasDe(i.envolvidos).forEach(p => pessoas.set(p, (pessoas.get(p) || 0) + 1)));
     const frentes = new Map();
-    items.forEach(i => { const f = i.frente || 'Sem frente'; const o = frentes.get(f) || { label: f, alta: 0, media: 0, baixa: 0 }; o[i.prioridade === 'Alta' ? 'alta' : i.prioridade === 'Baixa' ? 'baixa' : 'media']++; frentes.set(f, o); });
+    base.forEach(i => { const f = i.frente || 'Sem frente'; const o = frentes.get(f) || { label: f, alta: 0, media: 0, baixa: 0 }; o[i.prioridade === 'Alta' ? 'alta' : i.prioridade === 'Baixa' ? 'baixa' : 'media']++; frentes.set(f, o); });
 
     $('k-total').textContent = total; $('k-alta').textContent = alta.length; $('k-and').textContent = and; $('k-ok').textContent = ok; $('k-pes').textContent = pessoas.size;
 
@@ -548,24 +676,31 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (!total) take.textContent = 'Nenhum assunto ainda. Use "+ Novo assunto" para começar.';
     else {
       const s = (t) => { const b = document.createElement('strong'); b.textContent = t; return b; };
-      take.append(s(total + ' assuntos'), ` em ${frentes.size} frentes. `, s(alta.length + ' de prioridade alta'), `, ${and} em andamento e ${ok} concluídos.`);
+      const pl = (n, um, varios) => n + ' ' + (n === 1 ? um : varios);
+      take.append(s(pl(total, 'assunto', 'assuntos')), ` em ${pl(frentes.size, 'frente', 'frentes')}. `, s(alta.length + ' de prioridade alta'), `, ${and} em andamento e ${pl(ok, 'concluído', 'concluídos')}.`);
+      if (!isAdmin && minha) take.append(' Você está em ', s(String(items.length)), items.length === 1 ? ' deles.' : ' deles.');
     }
 
     bars($('ch-frente'), [...frentes.values()], [{ f: 'alta', n: 'Alta', c: 'var(--alta)' }, { f: 'media', n: 'Média', c: 'var(--blue)' }, { f: 'baixa', n: 'Baixa', c: 'var(--muted)' }],
       (r) => { state.frente = r.label; state.pessoa = ''; renderTable(); irParaTabela(); });
+    const meusNomes = (minha && minha.aliases || []).map(norm);
     if (state.pessoa && !pessoas.has(state.pessoa)) state.pessoa = '';
     bars($('ch-pessoa'), [...pessoas].map(([label, n]) => ({ label, n })).sort((a, b) => b.n - a.n), [{ f: 'n', n: 'Assuntos', c: 'var(--blue)' }],
-      (r) => { state.pessoa = r.label; state.frente = 'Todas'; renderTable(); irParaTabela(); });
+      (r) => {
+        if (!isAdmin && !meusNomes.includes(norm(r.label))) { toast('Você vê só os seus assuntos. Os números mostram o total do plano.'); return; }
+        state.pessoa = r.label; state.frente = 'Todas'; renderTable(); irParaTabela();
+      });
     const stColors = { 'A iniciar': 'var(--muted)', 'Em andamento': 'var(--warn)', 'Concluído': 'var(--ok)' };
-    bars($('ch-status'), ['A iniciar', 'Em andamento', 'Concluído'].map(st => ({ label: st, n: items.filter(i => (i.status || 'A iniciar') === st).length, color: stColors[st] })),
+    bars($('ch-status'), ['A iniciar', 'Em andamento', 'Concluído'].map(st => ({ label: st, n: base.filter(i => (i.status || 'A iniciar') === st).length, color: stColors[st] })),
       [{ f: 'n', n: 'Assuntos', c: 'var(--blue)' }]);
 
     $('dl-frentes').textContent = ''; new Set([...frentes.keys(), ...privItems.map(i => i.frente).filter(Boolean)]).forEach(f => { const o = document.createElement('option'); o.value = f; $('dl-frentes').appendChild(o); });
     $('dl-pessoas').textContent = ''; [...pessoas.keys()].forEach(p => { const o = document.createElement('option'); o.value = p; $('dl-pessoas').appendChild(o); });
 
     const chips = $('chips'); chips.textContent = '';
-    if (state.frente !== 'Todas' && !frentes.has(state.frente)) state.frente = 'Todas';
-    ['Todas', ...frentes.keys()].forEach(f => {
+    const frentesTab = new Set(items.map(i => i.frente || 'Sem frente'));
+    if (state.frente !== 'Todas' && !frentesTab.has(state.frente)) state.frente = 'Todas';
+    ['Todas', ...frentesTab].forEach(f => {
       const c = document.createElement('button'); c.type = 'button'; c.className = 'chip'; c.textContent = f; c.dataset.f = f;
       c.addEventListener('click', () => { state.frente = f; renderTable(); }); chips.appendChild(c);
     });
@@ -630,6 +765,77 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('hist-empty').hidden = histItems.length > 0;
   }
 
+  // ---------- Trilha ----------
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  function renderTrilha() {
+    const sel = $('tr-sel'), comTrilha = pessoasAll.filter(p => p.tem_trilha);
+    $('tr-sel-box').hidden = !isAdmin;
+    if (isAdmin) {
+      sel.textContent = '';
+      comTrilha.forEach(p => { const o = el('option', null, p.apelido); o.value = p.id; sel.appendChild(o); });
+      if (trilhaSel) sel.value = trilhaSel;
+    }
+    const p = pessoasAll.find(x => x.id === (isAdmin ? trilhaSel : (minha && minha.id)));
+    $('tr-vazio').hidden = !!(p && p.tem_trilha); $('tr-corpo').hidden = !(p && p.tem_trilha);
+    if (!p || !p.tem_trilha) { $('tr-nome').textContent = isAdmin ? 'Trilhas' : 'Minha trilha'; $('tr-cargo').textContent = ''; return; }
+    $('tr-nome').textContent = p.nome;
+    const c = $('tr-cargo'); c.textContent = (p.area ? p.area + ' · ' : '');
+    const b1 = el('b', null, p.cargo_atual || '—'), b2 = el('b', null, p.cargo_alvo || '—');
+    c.append(b1, ' → próximo cargo: ', b2);
+
+    const g = (s) => trilhaGeral.filter(x => x.secao === s).sort((a, b) => a.ordem - b.ordem);
+    const lista = (box, rows) => { box.textContent = ''; rows.forEach(r => { const li = el('li'); li.append(el('b', null, r.titulo), el('span', null, r.texto)); box.appendChild(li); }); };
+    lista($('tr-postura'), g('postura'));
+    lista($('tr-subir'), g('subir'));
+
+    const nv = $('tr-niveis'); nv.textContent = '';
+    g('niveis').forEach(n => {
+      const nome = n.titulo.split(' — ')[0];
+      const tipo = nome === p.cargo_atual ? 'atual' : nome === p.cargo_alvo ? 'alvo' : '';
+      const d = el('div', 'tr-nivel ' + tipo);
+      if (tipo) d.appendChild(el('span', 'tag', tipo === 'atual' ? 'Seu nível hoje' : 'Próximo nível'));
+      d.append(el('b', null, n.titulo), el('p', null, n.texto));
+      nv.appendChild(d);
+    });
+
+    const meus = trilhaItens.filter(x => x.pessoa_id === p.id);
+    const sec = (n) => meus.filter(x => x.sec_ordem === n).sort((a, b) => a.ordem - b.ordem);
+    const checks = (rows) => { const ul = el('ul', 'tr-checks'); rows.forEach(r => ul.appendChild(el('li', null, r.topico))); return ul; };
+    const col = (box, titulo, papel, blocos) => {
+      box.textContent = '';
+      box.append(el('h3', null, titulo), el('p', 'papel', papel || ''));
+      blocos.forEach(([h, rows]) => { if (rows.length) box.append(el('h4', null, h), checks(rows)); });
+    };
+    col($('tr-col-atual'), 'Hoje: ' + (p.cargo_atual || ''), p.papel_atual, [['Atividades', sec(1)]]);
+    col($('tr-col-alvo'), 'Próximo: ' + (p.cargo_alvo || ''), p.papel_alvo, [['Atividades', sec(2)], ['Métricas', sec(3)]]);
+    const comp = $('tr-comp'); comp.textContent = '';
+    sec(4).forEach(r => comp.appendChild(el('li', null, r.topico)));
+    $('tr-comp-sub').textContent = 'O que se espera de um ' + (p.cargo_alvo || 'próximo nível') + ': trilha oficial do Degreed' + (p.cargo_alvo === 'Assistente III' ? ', mais a linha "Postura e exemplo".' : '.');
+  }
+  $('tr-sel').addEventListener('change', (e) => { trilhaSel = e.target.value; renderTrilha(); });
+
+  function renderPessoas() {
+    const tb = $('tb-pessoas'); tb.textContent = '';
+    pessoasAll.forEach(p => {
+      const tr = el('tr');
+      const nome = el('td', 'as', p.apelido); nome.appendChild(el('small', null, p.nome));
+      const inp = el('input'); inp.type = 'email'; inp.value = p.email || ''; inp.placeholder = 'nome@cobli.co'; inp.id = 'email-' + p.id; inp.setAttribute('aria-label', 'E-mail de ' + p.apelido);
+      const tdI = el('td'); tdI.appendChild(inp);
+      const btn = el('button', 'btn ghost', 'Salvar'); btn.type = 'button';
+      btn.addEventListener('click', async () => {
+        const v = inp.value.trim().toLowerCase() || null;
+        btn.disabled = true;
+        const { error } = await sb.from('pessoas').update({ email: v }).eq('id', p.id);
+        btn.disabled = false;
+        if (error) toast(error.code === '23505' ? 'Esse e-mail já está ligado a outra pessoa' : 'Não foi possível salvar');
+        else { toast('E-mail salvo'); carregarPessoas(); }
+      });
+      const tdB = el('td'); tdB.appendChild(btn);
+      tr.append(nome, el('td', null, [p.area, p.cargo_atual].filter(Boolean).join(' · ') || '—'), tdI, tdB);
+      tb.appendChild(tr);
+    });
+  }
+
   // ---------- Editor ----------
   function openEditor(item, preset) {
     if (!isMembro) { toast('Seu e-mail não tem permissão para editar'); return; }
@@ -640,7 +846,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('f-problema').value = item?.problema || '';
     $('f-objetivo').value = item?.objetivo || '';
     $('f-como').value = item?.como_comecar || '';
-    $('f-env').value = item?.envolvidos || preset?.envolvidos || '';
+    $('f-env').value = item?.envolvidos || preset?.envolvidos || (!isAdmin && minha ? minha.apelido : '');
     $('f-prio').value = item?.prioridade || 'Média';
     $('f-status').value = item?.status || 'A iniciar';
     $('f-obs').value = item?.observacoes || '';
@@ -666,6 +872,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     };
     if (!data.assunto || !data.frente) { $('f-msg').textContent = 'Preencha o assunto e a frente.'; return; }
     data.privado = isPriv(data.envolvidos);
+    if (!isAdmin && !envolveMe(data.envolvidos)) { $('f-msg').textContent = 'Inclua seu nome em Envolvidos para salvar. Você só vê os assuntos em que está envolvido.'; return; }
     if (data.privado && !isAdmin) { $('f-msg').textContent = 'Com esses envolvidos o assunto vai para a área administrador, que só o Júlio pode editar. Inclua outra pessoa em Envolvidos para salvar.'; return; }
     $('f-save').disabled = true;
     try {
