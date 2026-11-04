@@ -408,6 +408,10 @@ details.visao summary { cursor: pointer; color: var(--muted); }
 .ag-pes { color: var(--blue); }
 @media (max-width: 720px) { .ag-row { grid-template-columns: 5.2rem minmax(0, 1fr) auto; } .ag-hora, .ag-tit { display: none; } .ag-row .oo-marcas { display: none; } }
 .fb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: 10px; }
+.ro-badge { background: #fff; color: var(--navy); border-radius: 999px; padding: 3px 10px; font-size: .72rem; font-weight: 800; }
+.so-leitura .linkbtn, .so-leitura #add, .so-leitura #priv-add, .so-leitura #tr-liberar { display: none !important; }
+.so-leitura .seg button, .so-leitura .mt-chip, .so-leitura .tp-row input { pointer-events: none; }
+.so-leitura .pes-card, .so-leitura .reg, .so-leitura .fb, .so-leitura .anot, .so-leitura .crit, .so-leitura .mapa-col, .so-leitura .ag-row, .so-leitura .oo-dest, .so-leitura tbody tr { cursor: default; }
 .poli-leg { display: flex; gap: 14px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); margin: 6px 0 12px; }
 .poli-leg span { display: inline-flex; align-items: center; gap: 6px; }
 table.poli { min-width: 860px; font-size: .8rem; }
@@ -456,7 +460,7 @@ table.slim tr:hover td { background: transparent; }
       <p>Assuntos da All Hands e do chão de fábrica, com objetivo, primeiro passo e responsáveis</p>
     </div>
     <div class="user-box" id="user-box" hidden>
-      <div class="ub-top"><b id="user-name"></b><button type="button" id="sair">Sair</button></div>
+      <div class="ub-top"><span class="ro-badge" id="ro-badge" hidden>Só visualização</span><b id="user-name"></b><button type="button" id="sair">Sair</button></div>
     </div>
   </div>
 </header>
@@ -769,6 +773,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   const sb = configurado && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
   let items = [], privItems = [], histItems = [];
+  let leitura = false;
+  const bloqueado = () => { if (!leitura) return false; toast('Seu acesso é só de visualização'); return true; };
   let isAdmin = false, isMembro = false, me = null, canal = null, iniciadoPara = null;
   let todos = [], pessoasAll = [], minha = null, trilhaGeral = [], trilhaItens = [], trilhaSel = null;
   let autoMap = new Map(), gestorMap = new Map(), postos = [], matrizPessoas = [], poliMap = new Map(), soDiv = false;
@@ -960,8 +966,11 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('auth').hidden = true; $('app').hidden = false; $('user-box').hidden = false;
     const md = me.user_metadata || {};
     $('user-name').textContent = md.nome || md.full_name || md.name || me.email;
-    const [a, m] = await Promise.all([sb.rpc('eh_admin'), sb.rpc('eh_membro')]);
-    isAdmin = a.data === true; isMembro = m.data === true;
+    const [a, m, ob] = await Promise.all([sb.rpc('eh_admin'), sb.rpc('eh_membro'), sb.rpc('eh_observador')]);
+    const obs = ob && ob.data === true;
+    isAdmin = a.data === true || obs; isMembro = m.data === true; leitura = obs && a.data !== true;
+    document.body.classList.toggle('so-leitura', leitura);
+    $('ro-badge').hidden = !leitura;
     $('add').hidden = !isMembro;
     await carregarPessoas();
     await carregarCentro();
@@ -973,7 +982,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     $('tab-trilha').hidden = !(isAdmin || (minha && minha.tem_trilha));
     $('tab-trilha').textContent = isAdmin ? 'Trilha' : 'Minha trilha';
     $('tb-title').textContent = isAdmin ? 'Todos os assuntos' : 'Meus assuntos';
-    $('tb-sub').textContent = isAdmin ? 'Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.' : 'Os assuntos em que você está envolvido. Os números e gráficos acima mostram o plano inteiro.';
+    $('tb-sub').textContent = leitura ? 'Todos os assuntos do plano. Seu acesso é só de visualização.' : isAdmin ? 'Clique em uma linha para editar. Tudo o que você muda atualiza os números e gráficos para todos.' : 'Os assuntos em que você está envolvido. Os números e gráficos acima mostram o plano inteiro.';
     const h = location.hash.slice(1);
     if (SUBS.includes(h)) setView('admin', h); else if (h === 'admin') setView('admin', 'equipe'); else setView(({ trilha: 'trilha', poli: 'poli', meus: 'meus' })[h] || 'plano');
     await carregar(); await carregarHist();
@@ -1182,6 +1191,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   }
   $('tr-so-div').addEventListener('change', (e) => { soDiv = e.target.checked; renderTrilha(); });
   $('tr-liberar').addEventListener('click', async () => {
+    if (bloqueado()) return;
     const p = pessoasAll.find(x => x.id === trilhaSel); if (!p) return;
     $('tr-liberar').disabled = true;
     const { error } = await sb.from('pessoas').update({ avaliacao_liberada: !p.avaliacao_liberada }).eq('id', p.id);
@@ -1205,6 +1215,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     return s;
   }
   async function salvarAuto(item, campos) {
+    if (bloqueado()) return;
     const atual = autoMap.get(item.id) || { status: null, exemplo: '' };
     const row = { item_id: item.id, pessoa_id: item.pessoa_id, status: atual.status, exemplo: atual.exemplo || '', ...campos };
     autoMap.set(item.id, row); renderTrilha();
@@ -1212,6 +1223,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (error) toast('Não foi possível salvar sua marcação');
   }
   async function salvarGestor(item, campos) {
+    if (bloqueado()) return;
     const atual = gestorMap.get(item.id) || { status: null, nota: '' };
     const row = { item_id: item.id, pessoa_id: item.pessoa_id, status: atual.status, nota: atual.nota || '', ...campos };
     gestorMap.set(item.id, row); renderTrilha();
@@ -1331,6 +1343,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     if (!ul.children.length) { const li = el('li', 'ok', 'Todos os postos têm pelo menos 2 pessoas que fazem sozinhas.'); ul.appendChild(li); }
   }
   function abrirMenu(btn, m, p) {
+    if (bloqueado()) return;
     const menu = $('poli-menu'); menu.textContent = '';
     menu.appendChild(el('div', 't', m.nome + ' · ' + p.posto));
     const escolher = async (n) => {
@@ -1366,7 +1379,9 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
       pessoasAll.forEach(p => { const o = el('option', null, p.apelido); o.value = p.id; sel.appendChild(o); });
       sel.value = c.pessoa_id || '';
       if (!c.pessoa_id) sel.classList.add('sem-liga');
+      sel.disabled = leitura;
       sel.addEventListener('change', async () => {
+        if (bloqueado()) return;
         const antigo = c.pessoa_id, novo = sel.value || null;
         if (antigo && antigo !== novo) { const r = await sb.from('pessoas').update({ email: null }).eq('id', antigo); if (r.error) { toast('Não foi possível salvar'); return; } }
         if (novo) { const r = await sb.from('pessoas').update({ email: String(c.email).toLowerCase() }).eq('id', novo); if (r.error) { toast(r.error.code === '23505' ? 'Esse e-mail já está ligado a outra pessoa' : 'Não foi possível salvar'); return; } }
@@ -1388,7 +1403,9 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
       const inp = el('input'); inp.type = 'email'; inp.value = p.email || ''; inp.placeholder = 'nome@cobli.co'; inp.id = 'email-' + p.id; inp.setAttribute('aria-label', 'E-mail de ' + p.apelido);
       const tdI = el('td'); tdI.appendChild(inp);
       const btn = el('button', 'btn ghost', 'Salvar'); btn.type = 'button';
+      inp.disabled = leitura; btn.hidden = leitura;
       btn.addEventListener('click', async () => {
+        if (bloqueado()) return;
         const v = inp.value.trim().toLowerCase() || null;
         btn.disabled = true;
         const { error } = await sb.from('pessoas').update({ email: v }).eq('id', p.id);
@@ -1492,7 +1509,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const hoje = hojeISO();
     const prox = ooList.filter(o => o.data >= hoje && o.status !== 'Cancelado');
     const pdiAll = registros.filter(r => r.colecao === 'pdi');
-    $('adm-resumo').textContent = `${time().length} diretos · ${pdiAll.length} objetivos de PDI, ${pdiAll.filter(r => r.dados.status === 'Concluído').length} concluídos · próximo 1:1 em ${prox.length ? fmtDia(prox[0].data) + ' com ' + nomeDe(prox[0].pessoa_id) : '—'} · ${registros.filter(r => r.colecao === 'anotacao').length} anotações suas`;
+    $('adm-resumo').textContent = `${time().length} diretos · ${pdiAll.length} objetivos de PDI, ${pdiAll.filter(r => r.dados.status === 'Concluído').length} concluídos · próximo 1:1 em ${prox.length ? fmtDia(prox[0].data) + ' com ' + nomeDe(prox[0].pessoa_id) : '—'} · ${registros.filter(r => r.colecao === 'anotacao').length} ${leitura ? 'anotações do Júlio' : 'anotações suas'}`;
     if (admSub === 'equipe') renderEquipe();
     if (admSub === 'mapa') renderMapa();
     if (admSub === 'planejamento') renderPlanejamento();
@@ -1505,6 +1522,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const s = el('section', 'blk');
     const h = el('div', 'blk-head'); h.appendChild(el('h3', null, titulo));
     if (acao) { const b = el('button', 'linkbtn', acao[0]); b.type = 'button'; b.addEventListener('click', acao[1]); h.appendChild(b); }
+    if (sub && leitura) sub = sub.split(/(?<=\.)\s+/).filter(x => !/clique|só suas|só você|Só você/i.test(x)).join(' ');
     s.appendChild(h); if (sub) s.appendChild(el('p', 'sub', sub));
     return s;
   }
@@ -1596,6 +1614,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     return c;
   }
   async function trocarStatus(item) {
+    if (bloqueado()) return;
     const atual = gestorMap.get(item.id)?.status || null;
     const prox = atual == null ? 'Atende' : atual === 'Atende' ? 'Parcial' : atual === 'Parcial' ? 'Não atende' : null;
     const row = { item_id: item.id, pessoa_id: item.pessoa_id, status: prox, nota: (gestorMap.get(item.id) || {}).nota || '' };
@@ -1803,6 +1822,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   let regAtual = null, regDelArm = false;
   const PESSOAL = ['ficha', 'mapa', 'pdi', 'promocao', 'anotacao', 'feedback', 'roteiro'];
   function abrirReg(col, pid, r, escolher) {
+    if (bloqueado()) return;
     const cfg = COL[col]; regAtual = { col, pid, r }; regDelArm = false;
     $('rv-title').textContent = (r ? 'Editar · ' : 'Novo · ') + cfg.titulo + (pid && !escolher ? ' · ' + nomeDe(pid) : '');
     const box = $('rv-campos'); box.textContent = '';
@@ -1857,6 +1877,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   // ----- Editor de 1:1 -----
   let ooAtual = null, ooDelArm = false;
   function abrirOO(o, pid) {
+    if (bloqueado()) return;
     ooAtual = o; ooDelArm = false;
     $('ov1-title').textContent = o ? '1:1 · ' + nomeDe(o.pessoa_id) : 'Novo 1:1';
     const sel = $('ov1-pessoa'); sel.textContent = '';
@@ -1910,6 +1931,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
   // ---------- Editor ----------
   function openEditor(item, preset) {
+    if (bloqueado()) return;
     if (!isMembro) { toast('Seu e-mail não tem permissão para editar'); return; }
     editing = item || null; delArmed = false;
     $('f-title').textContent = item ? 'Editar assunto' : 'Novo assunto';
