@@ -442,6 +442,8 @@ table.slim tr { cursor: default; }
 table.slim select { border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 6px 8px; font: inherit; font-size: .85rem; }
 table.slim select.sem-liga { border-color: var(--alta); background: var(--alta-soft); }
 table.slim tr:hover td { background: transparent; }
+table.slim tr.conta-bloq td { opacity: .7; }
+.tag-bloq { display: inline-block; margin-right: 8px; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; background: var(--alta-soft); color: var(--alta); }
 .pubwrap { display: flex; flex-direction: column; gap: 22px; }
 #btn-admin[aria-pressed="true"] { background: #fff; color: var(--navy); }
 .gbtn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border: 1px solid var(--line); background: var(--panel); color: var(--fg); border-radius: 8px; padding: 10px 14px; font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer; }
@@ -496,6 +498,14 @@ table.slim tr:hover td { background: transparent; }
       <button type="button" class="linkbtn" id="a-to-esq">Esqueci a senha</button>
     </div>
   </form>
+</section>
+
+<section class="wrap auth" id="sem-acesso" hidden>
+  <div class="auth-card">
+    <h2>Sem acesso</h2>
+    <p class="sub">Seu e-mail (<b id="sa-email"></b>) não tem acesso a este plano. Se achar que é um engano, fale com o Júlio.</p>
+    <button type="button" class="btn" id="sa-sair">Sair</button>
+  </div>
 </section>
 
 <main class="wrap" id="app" hidden>
@@ -582,7 +592,7 @@ table.slim tr:hover td { background: transparent; }
       <p class="sub">Todas as contas que já fizeram login. Se a coluna "Ligada a" estiver vazia, a pessoa só vê o que é do time: escolha quem ela é e salve.</p>
       <div class="tablewrap">
         <table class="slim">
-          <thead><tr><th>Nome no login</th><th>E-mail</th><th>Último acesso</th><th>Ligada a</th></tr></thead>
+          <thead><tr><th>Nome no login</th><th>E-mail</th><th>Último acesso</th><th>Ligada a</th><th>Acesso</th></tr></thead>
           <tbody id="tb-contas"></tbody>
         </table>
       </div>
@@ -889,6 +899,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   }
   document.querySelectorAll('.ub-tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view, b.dataset.sub)));
   $('sair').addEventListener('click', async () => { setView('plano'); await sb.auth.signOut(); });
+  $('sa-sair').addEventListener('click', async () => { await sb.auth.signOut(); });
   $('a-google').addEventListener('click', async () => {
     if (!sb) return;
     authMsg('');
@@ -960,6 +971,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && me) recarregar(); });
 
   async function iniciar(session) {
+    $('sem-acesso').hidden = true;
     if (!session) { iniciadoPara = null; me = null; if (canal) { sb.removeChannel(canal); canal = null; } showAuth('entrar'); return; }
     if (iniciadoPara === session.user.id && !$('app').hidden) return;
     iniciadoPara = session.user.id; me = session.user;
@@ -969,6 +981,13 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const [a, m, ob] = await Promise.all([sb.rpc('eh_admin'), sb.rpc('eh_membro'), sb.rpc('eh_observador')]);
     const obs = ob && ob.data === true;
     isAdmin = a.data === true || obs; isMembro = m.data === true; leitura = obs && a.data !== true;
+    if (!isAdmin && !isMembro) {
+      // E-mail bloqueado ou sem permissão: não mostra nada do plano.
+      $('app').hidden = true; $('mainnav').hidden = true;
+      $('sa-email').textContent = me.email || '';
+      $('sem-acesso').hidden = false;
+      return;
+    }
     document.body.classList.toggle('so-leitura', leitura);
     $('ro-badge').hidden = !leitura;
     $('add').hidden = !isMembro;
@@ -1390,7 +1409,31 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
       });
       st.appendChild(sel);
       let quando = '—'; try { if (c.ultimo_login) quando = new Date(c.ultimo_login).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); } catch {}
-      tr.append(nm, el('td', null, c.email), el('td', 'when', quando), st);
+      const ac = el('td');
+      const eu = me && String(me.email).toLowerCase() === String(c.email).toLowerCase();
+      if (c.bloqueado) { tr.classList.add('conta-bloq'); sel.disabled = true; ac.appendChild(el('span', 'tag-bloq', 'Bloqueada')); }
+      if (!eu && c.bloqueado !== undefined) {
+        const bb = el('button', 'btn ghost', c.bloqueado ? 'Desbloquear' : 'Bloquear'); bb.type = 'button';
+        bb.hidden = leitura;
+        bb.addEventListener('click', async () => {
+          if (bloqueado()) return;
+          const em = String(c.email).toLowerCase();
+          if (!c.bloqueado && !confirm('Bloquear ' + em + '? Essa conta não vai ver mais nada do plano.')) return;
+          bb.disabled = true;
+          let r;
+          if (c.bloqueado) r = await sb.from('bloqueados').delete().eq('email', em);
+          else {
+            r = await sb.from('bloqueados').upsert({ email: em, motivo: 'Sem acesso (bloqueado pelo admin)' });
+            if (!r.error && c.pessoa_id) await sb.from('pessoas').update({ email: null }).eq('id', c.pessoa_id);
+          }
+          bb.disabled = false;
+          if (r.error) { toast('Não foi possível salvar. Rode o arquivo atualizacao-bloqueio.sql no Supabase.'); return; }
+          toast(c.bloqueado ? em + ' desbloqueada' : em + ' bloqueada');
+          await carregarPessoas(); renderContas();
+        });
+        ac.appendChild(bb);
+      }
+      tr.append(nm, el('td', null, c.email), el('td', 'when', quando), st, ac);
       tb.appendChild(tr);
     });
   }
