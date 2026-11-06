@@ -88,6 +88,12 @@ main.wrap { padding-block: 22px 48px; display: flex; flex-direction: column; gap
 .chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip { border: 1px solid var(--line); background: transparent; color: var(--fg); border-radius: 999px; padding: 5px 12px; font: inherit; font-size: .78rem; cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.st-chips .st-lab { font-size: .78rem; color: var(--muted); align-self: center; margin-right: 2px; }
+.st-chips .chip.sep { margin-left: auto; }
+.chip .n { opacity: .7; margin-left: 4px; }
+tr.grp td { background: var(--bg); border-top: 2px solid var(--line); padding-top: 14px; font-weight: 700; font-size: .85rem; }
+tr.grp td .pill { margin-right: 8px; }
+tr.grp td small { color: var(--muted); font-weight: 600; }
 .search { flex: 1 1 12rem; min-width: 0; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 7px 10px; font: inherit; font-size: .85rem; }
 .btn { border: 0; background: var(--blue); color: #fff; border-radius: 8px; padding: 8px 14px; font: inherit; font-weight: 700; font-size: .85rem; cursor: pointer; }
 .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
@@ -537,7 +543,7 @@ table.slim tr.conta-bloq td { opacity: .7; }
     </div>
     <div class="card">
       <h2>Andamento</h2>
-      <p class="sub">Status de todos os assuntos</p>
+      <p class="sub">Clique em um status para ver os assuntos dele</p>
       <div class="bars" id="ch-status"></div>
     </div>
   </section>
@@ -558,7 +564,8 @@ table.slim tr.conta-bloq td { opacity: .7; }
         </select>
       </label>
     </div>
-    <div class="chips" id="chips" style="margin-bottom:12px"></div>
+    <div class="chips" id="chips" style="margin-bottom:8px"></div>
+    <div class="chips st-chips" id="st-chips" style="margin-bottom:12px"></div>
     <div class="pfilter" id="pfilter" hidden><span id="pfilter-txt"></span><button type="button" class="btn ghost" id="pfilter-clear">Ver todos</button></div>
     <div class="tablewrap">
       <table>
@@ -788,7 +795,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   let isAdmin = false, isMembro = false, me = null, canal = null, iniciadoPara = null;
   let todos = [], pessoasAll = [], minha = null, trilhaGeral = [], trilhaItens = [], trilhaSel = null;
   let autoMap = new Map(), gestorMap = new Map(), postos = [], matrizPessoas = [], poliMap = new Map(), soDiv = false;
-  const state = { frente: 'Todas', q: '', sort: 'prio-desc', pessoa: '' };
+  const state = { frente: 'Todas', q: '', sort: 'prio-desc', pessoa: '', status: 'Todos', separar: false };
+  try { state.separar = localStorage.getItem('cobli-separar') === '1'; } catch {}
   try { const s = localStorage.getItem('cobli-sort'); if (s) state.sort = s; } catch {}
   const prioRank = { 'Alta': 0, 'Média': 1, 'Baixa': 2 };
   const statRank = { 'Em andamento': 0, 'A iniciar': 1, 'Concluído': 2 };
@@ -1075,8 +1083,9 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
         state.pessoa = r.label; state.frente = 'Todas'; renderTable(); irParaTabela();
       });
     const stColors = { 'A iniciar': 'var(--muted)', 'Em andamento': 'var(--warn)', 'Concluído': 'var(--ok)' };
-    bars($('ch-status'), ['A iniciar', 'Em andamento', 'Concluído'].map(st => ({ label: st, n: base.filter(i => (i.status || 'A iniciar') === st).length, color: stColors[st] })),
-      [{ f: 'n', n: 'Assuntos', c: 'var(--blue)' }]);
+    bars($('ch-status'), STATUS.map(st => ({ label: st, n: base.filter(i => (i.status || 'A iniciar') === st).length, color: stColors[st] })),
+      [{ f: 'n', n: 'Assuntos', c: 'var(--blue)' }],
+      (r) => { state.status = r.label; renderTable(); irParaTabela(); });
 
     $('dl-frentes').textContent = ''; new Set([...frentes.keys(), ...privItems.map(i => i.frente).filter(Boolean)]).forEach(f => { const o = document.createElement('option'); o.value = f; $('dl-frentes').appendChild(o); });
     $('dl-pessoas').textContent = ''; [...pessoas.keys()].forEach(p => { const o = document.createElement('option'); o.value = p; $('dl-pessoas').appendChild(o); });
@@ -1113,6 +1122,23 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     return tr;
   }
 
+  const STATUS = ['A iniciar', 'Em andamento', 'Concluído'];
+  const stDe = (i) => i.status || 'A iniciar';
+  function renderStChips(base) {
+    const box = $('st-chips'); box.textContent = '';
+    box.appendChild(el('span', 'st-lab', 'Status:'));
+    ['Todos', ...STATUS].forEach(st => {
+      const c = el('button', 'chip', st); c.type = 'button';
+      c.appendChild(el('span', 'n', String(st === 'Todos' ? base.length : base.filter(i => stDe(i) === st).length)));
+      c.setAttribute('aria-pressed', String(state.status === st));
+      c.addEventListener('click', () => { state.status = st; renderTable(); });
+      box.appendChild(c);
+    });
+    const sep = el('button', 'chip sep', 'Separar por status'); sep.type = 'button';
+    sep.setAttribute('aria-pressed', String(state.separar));
+    sep.addEventListener('click', () => { state.separar = !state.separar; try { localStorage.setItem('cobli-separar', state.separar ? '1' : '0'); } catch {} renderTable(); });
+    box.appendChild(sep);
+  }
   function renderTable() {
     $('chips').querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.f === state.frente)));
     $('pfilter').hidden = !state.pessoa;
@@ -1122,12 +1148,22 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
       t.append(b, ' (' + items.filter(i => pessoasDe(i.envolvidos).includes(state.pessoa)).length + ')');
     }
     const q = state.q;
-    const rows = items.filter(i => (state.frente === 'Todas' || i.frente === state.frente) &&
+    const base = items.filter(i => (state.frente === 'Todas' || i.frente === state.frente) &&
       (!state.pessoa || pessoasDe(i.envolvidos).includes(state.pessoa)) &&
-      (!q || [i.assunto, i.frente, i.problema, i.objetivo, i.como_comecar, i.envolvidos, i.status, i.prioridade, i.observacoes].join(' ').toLowerCase().includes(q)))
-      .sort(sorters[state.sort] || sorters['prio-desc']);
+      (!q || [i.assunto, i.frente, i.problema, i.objetivo, i.como_comecar, i.envolvidos, i.status, i.prioridade, i.observacoes].join(' ').toLowerCase().includes(q)));
+    renderStChips(base);
+    const rows = base.filter(i => state.status === 'Todos' || stDe(i) === state.status).sort(sorters[state.sort] || sorters['prio-desc']);
     const tb = $('tb'); tb.textContent = '';
-    rows.forEach(i => tb.appendChild(rowFor(i)));
+    if (state.separar) {
+      STATUS.filter(st => state.status === 'Todos' || st === state.status).forEach(st => {
+        const grupo = rows.filter(i => stDe(i) === st);
+        if (!grupo.length) return;
+        const h = el('tr', 'grp static'); const td = el('td'); td.colSpan = 7;
+        td.append(el('span', 'pill ' + (statCls[st] || 's-iniciar'), st), el('small', null, grupo.length === 1 ? '1 assunto' : grupo.length + ' assuntos'));
+        h.appendChild(td); tb.appendChild(h);
+        grupo.forEach(i => tb.appendChild(rowFor(i)));
+      });
+    } else rows.forEach(i => tb.appendChild(rowFor(i)));
     $('tb-empty').hidden = rows.length > 0;
   }
 
